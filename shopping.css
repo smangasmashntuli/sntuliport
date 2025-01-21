@@ -1,0 +1,309 @@
+h1 {
+    margin: 0;
+    color: #ff7200;
+    font-size: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    border: none;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-size: cover;
+    position: fixed; 
+    top: 0;
+    width: 100%;
+    background-color: #ffffff; 
+    box-shadow: 0px 0px 30px rgba(238, 238, 238, 0.877);
+    z-index: 1000;
+}
+.menu {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.menu li {
+    margin-right: 55px;
+    
+}
+
+.menu a {
+    display: block;
+    padding: 5px;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    transition: color 0.4s ease-in-out;
+}
+
+.menu a:hover {
+    color: #ff7200;
+}
+.gallery { 
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    margin-top: 80px;
+    position: relative;			
+}
+.gallery img {
+    max-width: 2000%;
+    height: auto;
+    transition: transform 0.2s ease-in-out;
+    margin: 10px; 
+    position: relative;
+    z-index: 2;
+}
+.Selector {
+    padding-top: 10px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.SelectorContainer {
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    margin: 1px;
+}
+.Selector img{
+    top: 100%;
+}
+.Selector span {
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+}		
+.catalogue {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.catalogue h3 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.catalogue ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px;
+    justify-content: center; 
+}
+.catalogue li {
+    margin: 10px; 
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    width: 250px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+}
+
+.catalogue img {
+    max-width: 100%; 
+    height: auto;
+}
+
+.catalogue span {
+    display: block;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+hr{
+border: 1px solid black;
+margin: 30px;
+}
+.about {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+}
+.about li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #d1d1f9;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    background-color: #d1d1f9;
+}
+
+.about i {
+    font-size: 36px;
+    margin-bottom: 5px;
+}
+.shopingCart{
+    cursor: pointer;
+}
+
+.shopingCart i{
+    cursor: pointer;
+}
+.shopingCart span{
+    background: red;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position: absolute;
+    top: 10%;
+    left: 93.5%;
+    padding: 3px 10px;
+}
+.card {
+    position: fixed;
+    top: 0;
+    right: -500px;
+    width: 500px;
+    background-color: white;
+    border-left: 1px solid grey;
+    height: 100vh;
+    transition: 0.5s;
+}
+.card.active {
+    right: 0;
+}
+    
+    .card h1{
+        color: Yellow;
+        font-weight: 300;
+        margin: 0;
+        padding: 0 20px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+    }
+    .card .checkout{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .card .checkout{
+        background-color: orange;
+        color: black;
+        width: 50%;
+        height: 70px;
+        display: inline-block;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 0;
+    }
+    
+    .card .checkout div:nth-child(2){
+        background-color: black;
+        color: white;
+        text-align: center;
+        justify-content: center;
+        border: 1px solid black;
+        width: 100%;
+        height: 68px;
+        margin-left: 250px;
+        margin-top: -18px;
+        
+    }
+    .listCard {
+        max-height: 450px; 
+        overflow-y: auto; 
+        scrollbar-width: thin; 
+        scrollbar-color: #888 #f1f1f1;
+        
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+    }
+    .listCard li{
+        display: grid;
+        grid-template-columns: 100px repeat(3, 1fr);
+        color: black;
+        width: 450px;
+        row-gap: 8px;
+        padding: 0;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    .listCard li div{
+        display: flex;
+        font-size: 12px;
+        justify-content: center;
+        align-items: center;
+    }
+    .listCard li img{
+        width: 90%;
+    }
+    .cardTitle,
+    .cardPrice{
+        color: black;
+    }
+    .cardButton{
+        width: 28px;
+        height: 28px;
+        color: black;
+        font-size: 1.5rem;
+        font-weight: 500;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    .listCard select {
+        height: 15px;
+        width: 60px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 15px;
+        margin-right: 50px;
+    }
+    .remove-icon {
+        color: black;
+        background-image: url("https://th.bing.com/th/id/OIP.FBGl2_mjIgLfp9e8p8iWBQHaHa?w=199&h=199&c=7&r=0&o=5&pid=1.7");
+        background-repeat: no-repeat;
+        background-size: 17%;
+        margin-top: 10px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+    .mortar {
+        display: inline-block;
+        float: left;
+    }		
+    .brick {
+        float: right;
+    }
+    

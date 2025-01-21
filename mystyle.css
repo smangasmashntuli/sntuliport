@@ -1,0 +1,161 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #f5f5f5;
+    position: sticky;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    font-size: 2.1rem;
+}
+
+
+.introduction {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 80px;
+    position: relative;
+}
+
+.introduction img {
+    background-image: url("../assets/images/Screenshot 2025-01-16 140411.png");
+    display: none;
+    width: 900px;
+    height: 500px;
+    transition: transform 0.2s ease-in-out;
+    margin: 10px;
+    position: relative;
+    z-index: 1000;
+}
+.intro2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+}
+
+.intro-text {
+    max-width: 40%; /* Adjust as needed to control text width */
+}
+
+.intro2 h1 {
+    margin: 55px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.intro2 p {
+    margin: 55px;
+    font-size: 13px;
+    line-height: 1.6; /* Adds readability */
+}
+
+.intro2 img {
+    width: 40%;
+    height: auto;
+    margin-right: 100px;
+}
+/* Center and style the featured cars section */
+.featured-cars {
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    width: 70%;
+    margin: 20px auto;
+    background-color: #c4c4c4;
+    text-align: center;
+    padding: 20px;
+    color: #000000;
+    box-shadow: 0px 5px 5px 0px;
+}
+
+.featured-cars h2 {
+    margin-bottom: 20px;
+}
+
+.featured-cars ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    gap: 20px;
+}
+
+.featured-cars ul li {
+    text-align: center;
+    width: 200px;
+}
+
+.featured-cars ul li img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.GUI{
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    background-color: #c4c4c4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin: 20px auto;
+    padding: 40px;
+    box-shadow: 0px 5px 5px 0px;
+}
+
+.for-head{
+    color: #000000;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.inputname{
+    width: 320px;
+    height: 60px;
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.GUI label{
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.GUI button{
+    width: 320px;
+    height: 50px;
+    background-color: rgb(66, 66, 255);
+    color: #f5f5f5;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.GUI button:hover{
+    background-color: rgb(56, 56, 255);
+}
+.GUI canvas{
+    width:100%;
+    max-width:600px;
+    color: #000000;
+}
+.GUI h2{
+    padding: 20px;
+}
