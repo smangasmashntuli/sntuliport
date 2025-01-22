@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
                brands are most preferred, offering a helpful guide for anyone considering their next car purchase.
             </p>
             </div>
-            <img src="" alt="Screenshot 2024-11-13 224127.png">
+            <img src="images/OIP.jpeg" alt="iconpng">
         </div>
         <div class = "featured-cars">
             <h2>Most Outgoing Cars</h2>
