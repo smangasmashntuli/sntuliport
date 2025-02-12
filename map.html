@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Simulation</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="map.css">
+</head>
+<body>
+    <h1> Thank you for placing your order...<br>
+        Kindly complete the following steps to recieve your order
+    </h1>
+	<label>Name
+        <input type="text" id="name" required></label>
+    <label>
+        Enter your location:
+        <input type="text" id="location" placeholder="e.g., Johannesburg">
+        <button onclick="searchUserLocation()">Set User Location</button>
+    </label>
+    <label>
+        Enter store location:
+        <input type="text" id="store" placeholder="Enter Chicken Licken store near you">
+        <button onclick="searchStoreLocation()">Set Store Location</button>
+    </label>
+    <button onclick="simulateDelivery()">Simulate Delivery</button>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="map.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+</body>
+</html>
