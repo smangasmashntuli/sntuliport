@@ -1,4 +1,4 @@
-const map = L.map('map').setView([0, 0], 2); // Global view
+const map = L.map('map').setView([0, 0], 2); 
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -24,10 +24,8 @@ const map = L.map('map').setView([0, 0], 2); // Global view
                 const { lat, lon } = data[0];
                 const latLng = [parseFloat(lat), parseFloat(lon)];
 
-                // Add marker to the map
                 const marker = L.marker(latLng).addTo(map).bindPopup(popupText).openPopup();
 
-                // Center map to marker if it's the first input
                 if (isStore || !userMarker) {
                     map.setView(latLng, 14);
                 }
@@ -39,7 +37,7 @@ const map = L.map('map').setView([0, 0], 2); // Global view
             }
         }
 
-        // Function to search for user's location
+        // This function is for searching user's location
         async function searchUserLocation() {
             const userLocation = document.getElementById('location').value;
             if (!userLocation) {
@@ -53,7 +51,7 @@ const map = L.map('map').setView([0, 0], 2); // Global view
             userMarker = await geocodeLocation(userLocation, "Your Location");
         }
 
-        // Function to search for store location
+        // Also this function is for searching store location
         async function searchStoreLocation() {
             const storeLocation = document.getElementById('store').value;
             if (!storeLocation) {
@@ -67,7 +65,6 @@ const map = L.map('map').setView([0, 0], 2); // Global view
             storeMarker = await geocodeLocation(storeLocation, "Store Location", true);
         }
 
-        // Simulate delivery movement along roads
         function simulateDelivery() {
             if (!userMarker || !storeMarker) {
                 alert('Please provide both store and user locations first.');
@@ -77,30 +74,29 @@ const map = L.map('map').setView([0, 0], 2); // Global view
             const userLatLng = userMarker.getLatLng();
             const storeLatLng = storeMarker.getLatLng();
 
-            // Remove any existing routes
             if (routeControl) {
                 map.removeControl(routeControl);
             }
 
-            // Use Leaflet Routing Machine to calculate the route
+            // Here Leaflet Routing Machine to calculate the route is implemented
             routeControl = L.Routing.control({
                 waypoints: [
-                    L.latLng(storeLatLng.lat, storeLatLng.lng), // Starting point (store)
-                    L.latLng(userLatLng.lat, userLatLng.lng),  // Destination (user)
+                    L.latLng(storeLatLng.lat, storeLatLng.lng),
+                    L.latLng(userLatLng.lat, userLatLng.lng),
                 ],
-                routeWhileDragging: false, // Don't allow dragging
+                routeWhileDragging: false,
                 createMarker: function () {
-                    return null; // Hide default route markers
+                    return null;
                 },
                 lineOptions: {
-                    styles: [{ color: '#007bff', weight: 5, opacity: 0.7 }], // Custom route style
+                    styles: [{ color: '#007bff', weight: 5, opacity: 0.7 }],
                 },
             }).addTo(map);
 
             // Add a moving delivery marker
             routeControl.on('routesfound', function (e) {
-                const route = e.routes[0]; // Get the first route
-                const coordinates = route.coordinates; // List of coordinates along the route
+                const route = e.routes[0];
+                const coordinates = route.coordinates; 
                 let currentIndex = 0;
 
                 const deliveryMarker = L.marker(coordinates[0], {
@@ -111,7 +107,6 @@ const map = L.map('map').setView([0, 0], 2); // Global view
                     }),
                 }).addTo(map).bindPopup("Delivery in progress...").openPopup();
 
-                // Simulate movement along the route
 				const name = document.getElementById('name').value;
                 const interval = setInterval(() => {
                     if (currentIndex >= coordinates.length - 1) {
@@ -124,6 +119,6 @@ const map = L.map('map').setView([0, 0], 2); // Global view
 
                     currentIndex++;
                     deliveryMarker.setLatLng(coordinates[currentIndex]);
-                }, 100); // Adjust speed by changing the interval duration (100ms)
+                }, 350);
             });
         }
