@@ -9,20 +9,26 @@ spans.forEach((span, index) => {
     delay += 500;
 }
 );
-function sent() {
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const feedback = document.getElementById("feedback").value.trim();
 
-    if (name && email && feedback) {
-        const subject = "Feedback from " + name;
-        const body = "Name: " + name + "\nEmail: " + email + "\nFeedback: " + feedback;
-        const mailto = "mailto:smangasmashntuli@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-        window.location.href = mailto;
-    } else {
-        alert("Please fill in all fields.");
-    }
-}
+document.getElementById('feedbackform').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const feedback = document.getElementById('feedback').value;
+    
+    const response = await fetch('http://localhost:3000/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name, email, feedback})
+    });
+
+    const result = await response.text();
+    alert(result);
+});
+
 function userComment(){
     const Name = document.getElementById("c-name").value.trim();
     const Comment = document.getElementById("comment").value.trim();

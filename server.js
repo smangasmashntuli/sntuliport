@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
     host: 'localhost',  // Database host
     user: 'root', // Database user
     password: 'S!mangalis0',
-    database: 'mychatbot' // Database name
+    database: 'logindata' // Database name
 });
 
 connection.connect(err => {
@@ -23,7 +23,7 @@ connection.connect(err => {
 
 app.post('/submit', (req, res) => {
     const {name, email, feedback} = req.body;
-    const sql = 'INSERT INTO user_datails (name, email, feedback) VALUES (?, ?, ?)';
+    const sql = 'INSERT INTO user_details (username, email, feedback) VALUES (?, ?, ?)';
     connection.query(sql, [name, email, feedback], (err, result) => {
         if (err){
             console.error('Insert error:', err);
