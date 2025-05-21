@@ -10,6 +10,11 @@ label {
     display: block;
     margin-bottom: 10px;
 }
+input, select{
+    padding: 8px;
+    margin-left: 10px;
+    width: 300px;
+}
 button {
     margin-top: 10px;
     padding: 10px 15px;
@@ -21,9 +26,4 @@ button {
 }
 button:hover {
     background-color: #0056b3;
-}
-input {
-    padding: 8px;
-    margin-left: 10px;
-    width: 300px;
 }
