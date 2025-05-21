@@ -4,7 +4,10 @@ const chickenLickenStores = [
   { name: "Chicken Licken Soweto", lat: -26.2485, lon: 27.8540 },
   { name: "Chicken Licken Pretoria", lat: -25.7461, lon: 28.1881 },
   { name: "Chicken Licken Cape Town", lat: -33.9249, lon: 18.4241 },
-  { name: "Chicken Licken Durban", lat: -29.8587, lon: 31.0218 }
+  { name: "Chicken Licken Durban", lat: -29.8587, lon: 31.0218 },
+  {name: "Chicken Licken Cape Town, Mowbray", lat: -33.94798505820656, lon: 18.473358699234137},
+  {name: "Chicken Licken Cape Town Viking Way, Salberau", lat: -33.922918825723535, lon: 18.550091333475166},
+  {name: "Ckicken Licken Cape Town Athlone", lat: -33.9646443230828, lon: 18.52949196934994}
 ]
 
 const map = L.map('map').setView([0, 0], 2); 
