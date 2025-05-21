@@ -32,3 +32,21 @@ const carousel = document.querySelector('.carousel');
             }
         };
         
+        document.getElementById('products').addEventListener('order', async function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('title').value;
+    const email = document.getElementById('price').value;
+    const feedback = document.getElementById('description').value;
+    
+    const response = await fetch('http://localhost:3001/order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({title, price, description})
+    });
+
+    const result = await response.text();
+    alert(result);
+});
