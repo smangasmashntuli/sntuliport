@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive car voting application showcasing front-end development skills">
+    <title>Car Voting 2025 | Junior Developer Portfolio Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="carvoting.css">
+</head>
+<body>
+    <!-- Enhanced Header with Navigation -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-car"></i>
+                <span>CarVote 2025</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#vote">Vote</a></li>
+                    <li><a href="#leaderboard">Leaderboard</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="developer-profile">
+        <img src="C:\Users\smang\OneDrive\Pictures\Saved Pictures\334066167_148732571438811_7406887273882172408_n.jpg" alt="Developer Photo" class="developer-image">
+        <div class="developer-info">
+            <h2>Simangaliso Mazweni Ntuli</h2>
+            <p class="developer-title">Front-End Developer</p>
+            <div class="developer-skills">
+                <span class="skill-tag">HTML5</span>
+                <span class="skill-tag">CSS3</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">Java</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Dart</span>
+				<span class="skill-tag">Spring-Boot</span>
+            </div>
+            <div class="developer-links">
+                <a href="https://github.com/smangasmashntuli" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                <a href="www.linkedin.com/in/simangaliso-mazweni-ntuli-1784a62b6" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="https://drive.google.com/file/d/140VmCBFbtgugh6Aw919vy2mNpZaKKAcv/view?usp=drive_link" download><i class="fas fa-file-pdf"></i> Resume</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carousel Section -->
+    <section class="carousel" id="features">
+        <div class="carousel-container">
+            <div class="carousel-slide">
+                <img src="https://img-ik.cars.co.za/ik-seo/carsimages/tr:n-stock_large/10233224/2024-Volkswagen-Polo-10-TSI-Life-Auto.jpg?v=375204660" alt="VW Polo" data-caption="VW Polo - Affordable and Reliable">
+                <img src="https://businesstech.co.za/news/wp-content/uploads/2022/12/Suzuki-Swift-2021-160-_-Resized-1.webp" alt="Suzuki Swift" data-caption="Suzuki Swift - Sporty and Compact">
+                <img src="https://businesstech.co.za/news/wp-content/uploads/2023/04/toyota-starlet.jpg" alt="Toyota Starlet" data-caption="Toyota Starlet - Budget-Friendly">
+                <img src="https://topauto.co.za/wp-content/uploads/2021/02/KIA-Picanto-X-Line-header.jpg" alt="KIA Picanto" data-caption="KIA Picanto - Urban Efficiency">
+                <img src="https://img-ik.cars.co.za/ik-seo/carsimages/tr:n-stock_large/9850185_3/2023-Suzuki-Baleno-15-GLX-Auto.jpg?v=2776432509" alt="Suzuki Baleno" data-caption="Suzuki Baleno - Spacious and Modern">
+            </div>
+            <div class="carousel-caption"></div>
+            <button class="carousel-prev" aria-label="Previous Slide">&#10094;</button>
+            <button class="carousel-next" aria-label="Next Slide">&#10095;</button>
+            <div class="carousel-dots"></div>
+            <button class="carousel-play-pause" aria-label="Pause Slideshow">Pause</button>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="intro">
+        <div class="intro-text">
+            <h2>Welcome to Car Voting for Budget Cars 2025</h2>
+            <p>This interactive car voting application showcases my front-end development skills while providing a fun way for users to vote for their favorite budget cars. Built with pure HTML, CSS, and JavaScript, this project demonstrates:</p>
+            <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                <li>Responsive design principles</li>
+                <li>DOM manipulation and event handling</li>
+                <li>Local storage implementation</li>
+                <li>Chart.js integration for data visualization</li>
+                <li>Clean, maintainable code structure</li>
+            </ul>
+            <p style="margin-top: 1rem;">Vote for your favorite car brand and explore the most popular models of 2025!</p>
+        </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/2065/2065061.png" alt="Car Voting Concept" class="intro-image">
+    </section>
+
+    <!-- Voting Section -->
+    <section class="voting" id="vote">
+        <div class="voting-header">
+            <h2>Vote for Your Favorite Car</h2>
+            <div class="total-votes">Total Votes: <span id="total-votes-count">0</span></div>
+        </div>
+        <div class="car-grid">
+            <div class="car-card" data-brand="VW Polo">
+                <div class="vote-count">0</div>
+                <img src="https://th.bing.com/th/id/OIP.CJVeaCysOdhf3YtKKGVPZwAAAA?rs=1&pid=ImgDetMain" alt="VW Polo">
+                <h3>VW Polo</h3>
+                <ul class="car-features">
+                    <li>1.0L TSI Engine</li>
+                    <li>5-Star Safety Rating</li>
+                    <li>Apple CarPlay/Android Auto</li>
+                    <li>Fuel Efficiency: 5.5L/100km</li>
+                </ul>
+                <button class="vote-btn">Vote Now</button>
+            </div>
+            <div class="car-card" data-brand="Hyundai Grand i10">
+                <div class="vote-count">0</div>
+                <img src="https://th.bing.com/th/id/R.a1e0c72bc540f6be0b6aed35506b0a8d?rik=LMO%2bGVytxJJknA&pid=ImgRaw&r=0" alt="Hyundai Grand i10">
+                <h3>Hyundai Grand i10</h3>
+                <ul class="car-features">
+                    <li>1.2L Kappa Engine</li>
+                    <li>Spacious Interior</li>
+                    <li>Touchscreen Infotainment</li>
+                    <li>Fuel Efficiency: 5.8L/100km</li>
+                </ul>
+                <button class="vote-btn">Vote Now</button>
+            </div>
+            <div class="car-card" data-brand="Suzuki Baleno">
+                <div class="vote-count">0</div>
+                <img src="https://cdni.autocarindia.com/ExtraImages/20220228061914_Maruti_Baleno_2022_front.jpg" alt="Suzuki Baleno">
+                <h3>Suzuki Baleno</h3>
+                <ul class="car-features">
+                    <li>1.2L DualJet Engine</li>
+                    <li>Hybrid Option Available</li>
+                    <li>Heads-Up Display</li>
+                    <li>Fuel Efficiency: 5.1L/100km</li>
+                </ul>
+                <button class="vote-btn">Vote Now</button>
+            </div>
+			<div class="car-card" data-brand="Hyndai Grand i10">
+				<div class="vote-count">0</div>
+				<img src="https://img-ik.cars.co.za/ik-seo/carsimages/tr:n-stock_med/10236799/2019-Hyundai-Grand-i10-10-Motion.jpg?v=1624724591" alt="Hyndai Grand i10">
+				<h3>2019 Hyundai Grand i10 1.0 Motion</h3>
+				<ul class="car-features">
+					<li>1.0L Engine</li>
+					<li>Fuel Type is Petrol</li>
+					<li>Manual Transmission</li>
+					<li>Fuel Efficiency 5.4/100km</li>
+				</ul>
+				<button class="vote-btn">Vote Now</button>
+			</div>
+			<div class="car-card" data-brand="Suzuki S-Presso">
+				<div class="vote-count">0</div>
+				<img src="https://img-ik.cars.co.za/ik-seo/carsimages/tr:n-stock_med/10236749/2020-Suzuki-S-Presso-10-GL-Auto.jpg?v=3472979744" alt="Suzuki S-Presso">
+				<h3>2020 Suzuki S-Presso 1.0 GL+ Auto</h3>
+				<ul class="car-features">
+					<li>1.0L Engine</li>
+					<li>Fuel Type is Petrol</li>
+					<li>Automated Manual Transmission</li>
+					<li>Fuel Efficiency 4.9/100km</li>
+				</ul>
+				<button class="vote-btn">Vote Now</button>
+			</div>
+			<div class="car-card" data-brand="Suzuki Swift 1.2">
+				<div class="vote-count">0</div>
+				<img src="https://img-ik.cars.co.za/ik-seo/carsimages/tr:n-stock_med/10236668/2024-Suzuki-Swift-12-GL.jpg?v=1120903023" alt="Suzuki Swift 1.2">
+				<h3>2024 Suzuki Swift 1.2 GL</h3>
+				<ul class="car-features">
+					<li>1.2L Engine</li>
+					<li>Fuel Type is Petrol</li>
+					<li>Manual Transmission</li>
+					<li>Fuel Efficiency 4.9/100km</li>
+				</ul>
+				<button class="vote-btn">Vote Now</button>
+			</div>
+			<div class="car-card" data-brand="Toyota Vitz 1.0 XR">
+				<div class="vote-count">0</div>
+				<img src="https://img-ik.cars.co.za/ik-seo/carsimages/tr:n-stock_med/10236674/2024-Toyota-Vitz-10-XR.jpg?v=3606969932" alt="Toyota Vitz 1.0 XR">
+				<h3>2024 Toyota Vitz 1.0 XR</h3>
+				<ul class="car-features">
+					<li>1.0L Engine</li>
+					<li>Fuel Type is Petrol</li>
+					<li>Manual Transmission</li>
+					<li>Fuel Efficiency 4.4/100km</li>
+				</ul>
+				<button class="vote-btn">Vote Now</button>
+			</div>
+			<div class="car-card" data-brand="Toyota Starlet 1.5 XI">
+				<div class="vote-count">0</div>
+				<img src="https://img-ik.cars.co.za/ik-seo/carsimages/tr:n-stock_med/10236593/2024-Toyota-Starlet-15-XI.jpg?v=2854425881" alt="Toyota Starlet 1.5 XI">
+				<h3>2024 Toyota Starlet 1.5 XI</h3>
+				<ul class="car-features">
+					<li>1.5L Engine</li>
+					<li>Fuel Type is Petrol</li>
+					<li>Manual Transmission</li>
+					<li>Fuel Efficiency 5.4/100km</li>
+				</ul>
+				<button class="vote-btn">Vote Now</button>
+			</div>
+			<div class="car-card" data-brand="Renault Triber 1.0">
+				<div class="vote-count">0</div>
+				<img src="https://img-ik.cars.co.za/ik-seo/carsimages/tr:n-stock_med/10236534/2024-Renault-Triber-10-Dynamique.jpg?v=3547553975" alt="Renault Triber 1.0">
+				<h3>2024 Renault Triber 1.0 Dynamique</h3>
+				<ul class="car-features">
+					<li>1.0L Engine</li>
+					<li>Fuel Type is Petrol</li>
+					<li>Manual Transmission</li>
+					<li>Fuel Efficiency 5.5/100km</li>
+				</ul>
+				<button class="vote-btn">Vote Now</button>
+			</div>
+			<div class="car-card" data-brand="Kia Picanto 1.0 LX">
+				<div class="vote-count">0</div>
+				<img src="https://img-ik.cars.co.za/ik-seo/carsimages/tr:n-stock_med/10236540_3/2025-Kia-Picanto-10-LX.jpg?v=3821304836" alt="Kia Picanto 1.0 LX">
+				<h3>2025 Kia Picanto 1.0 LX</h3>
+				<ul class="car-features">
+					<li>1.0L Engine</li>
+					<li>Fuel Type is Petrol</li>
+					<li>Manual Transmission</li>
+					<li>Fuel Efficiency 5.5/100km</li>
+				</ul>
+				<button class="vote-btn">Vote Now</button>
+			</div>
+			<div class="car-card" data-brand="Volkswagen Polo Vivo">
+				<div class="vote-count">0</div>
+				<img src="https://img-ik.cars.co.za/ik-seo/carsimages/tr:n-stock_med/10236156/2024-Volkswagen-Polo-Vivo-14-Trendline-5-dr.jpg?v=1941742077" alt="Volkswagen Polo Vivo">
+				<h3>2024 Volkswagen Polo Vivo 1.4 Trendline 5-dr</h3>
+				<ul class="car-features">
+					<li>1.1L Engine</li>
+					<li>Fuel Type is Petrol</li>
+					<li>Manual Transmission</li>
+					<li>Fuel Efficiency 5.5/100km</li>
+				</ul>
+				<button class="vote-btn">Vote Now</button>
+			</div>
+			<div class="car-card" data-brand="Nissan NP200 1.6">
+				<div class="vote-count">0</div>
+				<img src="https://img-ik.cars.co.za/ik-seo/carsimages/tr:n-stock_med/10235344/2024-Nissan-NP200-16.jpg?v=4147758569" alt="Nissan NP200 1.6">
+				<h3>2024 Nissan NP200 1.6</h3>
+				<ul class="car-features">
+					<li>1.6L Engine</li>
+					<li>Fuel Type is Petrol</li>
+					<li>Manual Transmission</li>
+					<li>Fuel Efficiency 8.1/100km</li>
+				</ul>
+				<button class="vote-btn">Vote Now</button>
+			</div>
+			<div class="car-card" data-brand="Nissan Magnite 1.0 Acenta">
+				<div class="vote-count">0</div>
+				<img src="https://img-ik.cars.co.za/ik-seo/carsimages/tr:n-stock_med/10235890/2024-Nissan-Magnite-10-Acenta-AMT.jpg?v=1802167145" alt="Nissan Magnite 1.0 Acenta">
+				<h3>2024 Nissan Magnite 1.0 Acenta AMT</h3>
+				<ul class="car-features">
+					<li>1.0L Engine</li>
+					<li>Fuel Type is Petrol</li>
+					<li>Automated Manual Transmission</li>
+					<li>Fuel Efficiency 5.9/100km</li>
+				</ul>
+				<button class="vote-btn">Vote Now</button>
+			</div>
+			<div class="car-card" data-brand="Kia Picanto 1.0">
+				<div class="vote-count">0</div>
+				<img src="https://img-ik.cars.co.za/ik-seo/carsimages/tr:n-stock_med/10235525/2025-Kia-Picanto-10-LX-Manual.jpg?v=2536154573" alt="Kia Picanto 1.0">
+				<h3>2025 Kia Picanto 1.0 LX Manual</h3>
+				<ul class="car-features">
+					<li>1.0L Engine</li>
+					<li>Fuel Type is Petrol</li>
+					<li>Manual Transmission</li>
+					<li>Fuel Efficiency 5.1/100km</li>
+				</ul>
+				<button class="vote-btn">Vote Now</button>
+			</div>
+        </div>
+        <button id="reset-votes">Reset All Votes</button>
+    </section>
+	
+	<section class="leaderboard" id="leaderboard">
+    <div class="leaderboard-header">
+        <h2>Current Leaderboard</h2>
+        <div class="chart-legend" id="chart-legend"></div>
+    </div>
+    <div id="leaderboard-list"></div>
+</section>
+
+
+    <!-- Chart Section -->
+    <section class="charts">
+        <h2>Voting Analytics</h2>
+        <div class="chart-controls">
+            <button id="toggle-chart">Switch to Pie Chart</button>
+        </div>
+        <div class="chart-container">
+            <canvas id="vote-chart"></canvas>
+        </div>
+    </section>
+
+    <section class="car-of-day">
+        <h2>Car of the Day</h2>
+        <div class="car-of-day-content" id="car-of-day-content">
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <h2>What Users Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "This voting app is so intuitive and fun to use! The results visualization is excellent and helps me understand car popularity trends."
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah Johnson">
+                    <div class="author-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>Car Enthusiast</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "As a developer, I appreciate the clean UI and smooth functionality. The code structure is well-organized and demonstrates solid front-end skills."
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                    <div class="author-info">
+                        <h4>Michael Chen</h4>
+                        <p>Senior Developer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "The mobile responsiveness is impressive! This app works perfectly on my phone, tablet, and desktop - a rare find these days."
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Emily Rodriguez">
+                    <div class="author-info">
+                        <h4>Emily Rodriguez</h4>
+                        <p>UI Designer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="intro" id="about">
+        <div class="intro-text">
+            <h2>About This Project</h2>
+            <p>This Car Voting Application was developed as a portfolio project to showcase my front-end development skills. The application features:</p>
+            <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                <li>Interactive carousel with auto-play/pause functionality</li>
+                <li>Voting system with persistent data using localStorage</li>
+                <li>Dynamic leaderboard with percentage calculations</li>
+                <li>Interactive charts using Chart.js</li>
+                <li>Responsive design that works on all devices</li>
+                <li>Clean, semantic HTML and modular CSS</li>
+                <li>Well-structured JavaScript with clear functions</li>
+            </ul>
+            <p style="margin-top: 1rem;">The project demonstrates my ability to create engaging, interactive web applications without relying on frameworks, highlighting my understanding of core web technologies.</p>
+        </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/2282/2282188.png" alt="Web Development" class="intro-image">
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>CarVote 2025</h3>
+                <p>The most interactive car voting experience on the web. Discover trends, compare models, and make your voice heard!</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Developer Info</h3>
+                <ul>
+                    <li>
+                        <a href="index.html" target="_blank">Portfolio</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/smangasmashntuli" target="_blank">GitHub</a>
+                    </li>
+                    <li><a href="www.linkedin.com/in/simangaliso-mazweni-ntuli-1784a62b6" target="_blank">LinkedIn</a></li>
+                    <li><a href="smangansmashntuli@gmail.com">Contact Me</a></li>
+                    <li><a href="https://drive.google.com/file/d/140VmCBFbtgugh6Aw919vy2mNpZaKKAcv/view?usp=drive_link" download>Download Resume</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for the latest car trends and voting results.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 CarVote. All Rights Reserved. Created by Your Name.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast-notification"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+
+
+    <script src="carvoting.js"></script>
+
+</body>
+</html>
