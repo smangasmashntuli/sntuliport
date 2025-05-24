@@ -55,43 +55,7 @@ function userComment(){
             placeholder.appendChild(commentDiv);
         }
     }else{
-        alert("Please fill in all fields.");
-    }
-}
-
-document.addEventListener("DOMContentLoaded", function(){
-    const boxchat = document.getElementById("chatbotA");
-    if(boxchat){
-        boxchat.addEventListener("click", function(){
-            const secNewPage = `
-            <html>
-            <head>
-                <link rel="stylesheet" href="chatbot.css">
-                <script src="chatbot.js"></script>
-                <title>ChatBot</title>
-            </head>
-            <body>
-                <div class="chat" id="chatContainer">
-                    <header>Rapid
-                    </header>
-                    <div class="robot" id="chatwithRob">
-			        </div>
-                    <div class="inputContan">
-                        <input type="text" id="user-input" placeholder="Type a message...">
-                        <button class="buttton" onclick="sendMessage()">Send</button>
-                    </div>
-                </div>
-            </body>
-            </html>
-            `;
-            
-            const newTab = window.open();
-            newTab.document.write(secNewPage);
-            newTab.document.close();
-    });
-    }
-});
-
+        alert("Pl
 
 document.addEventListener("DOMContentLoaded", function() {
     const openMatrixBu = document.getElementById("openMatrix");
