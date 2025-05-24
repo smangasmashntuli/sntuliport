@@ -27,7 +27,7 @@ let conversationHistory = [
     {
         role: "model",
         parts: [{
-            text: "🧑‍💻 Hello👋! I'm Rapid, your AI Health Assistant 👨‍⚕️. I can provide general health information. How can I help you today? ⚠️ Remember, I'm not a substitute for professional medical care."
+            text: "🧑‍💻 Hello👋! I'm Smash Assistant, your AI Health Assistant 👨‍⚕️. I can provide general health information. How can I help you today? ⚠️ Remember, I'm not a substitute for professional medical care."
         }]
     }
 ];
