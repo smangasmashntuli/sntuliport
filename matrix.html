@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MPHEMBA MATRIX - Your one-stop shop for computer components and electronics">
+    <title>MPHEMBA MATRIX - Premium Computer Components</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="matrixStyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+	</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>MPHEMBA <span>MATRIX</span></h1>
+                <p>Premium Tech Solutions</p>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search products...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="cart-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                <button class="login-btn">Login</button>
+            </div>
+            
+            <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><button class="login-btn">Login</button></li>
+        </ul>
+    </div>
+
+   <!-- Hero Banner -->
+<section class="hero" id="home">
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2 class="hero-title">Upgrade Your <span>Tech Experience</span></h2>
+                <p class="hero-subtitle">Premium computer components and electronics at competitive prices</p>
+                <div class="hero-cta">
+                    <button class="cta-btn">Shop Now <i class="fas fa-arrow-right"></i></button>
+                    <button class="secondary-btn">Learn More <i class="fas fa-info-circle"></i></button>
+                </div>
+                <div class="hero-features">
+                    <div class="feature-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Free Shipping on Orders Over R1000</span>
+                    </div>
+                    <div class="feature-badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>2-Year Warranty</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-slider">
+            <div class="slide active">
+                <img src="https://www.wootware.co.za/media/easyslide/asus-b850-b840-mobos-woot.jpg" alt="Computer Components">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="slide">
+                <img src="https://www.wootware.co.za/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/a/l/alienware-aw3225qf-2.jpg" alt="Gaming Monitors">
+                <div class="slide-overlay"></div>
+            </div>
+            <div class="slide">
+                <img src="https://www.wootware.co.za/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/w/o/wootbook-y16-wqxga-01.jpg" alt="High Performance Laptops">
+                <div class="slide-overlay"></div>
+            </div>
+			<div class="slide">
+				<img src="https://www.wootware.co.za/media/catalog/product/cache/1/image/512x512/9df78eab33525d08d6e5fb8d27136e95/w/v/wv27qhd0r-180hz-01.jpg" alt="Gaming Desktop Monitor">
+				<div class="slide-overlay"></div>
+			</div>
+            
+            <div class="slider-controls">
+                <button class="prev-slide" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="slider-dots"></div>
+                <button class="next-slide" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="feature-card">
+                <i class="fas fa-truck"></i>
+                <h3>Free Delivery</h3>
+                <p>On orders over R1000</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>2-Year Warranty</h3>
+                <p>On all products</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-credit-card"></i>
+                <h3>Secure Payment</h3>
+                <p>100% secure checkout</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>Dedicated support</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Categories -->
+    <section class="categories" id="products">
+        <div class="container">
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="category-grid">
+                <div class="category-card" onclick="filterProducts('components')">
+                    <img src="https://www.wootware.co.za/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/a/m/amd-r79800x3d-01.jpg" alt="Components">
+                    <h3>Components</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('laptops')">
+                    <img src="https://www.wootware.co.za/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/w/o/wootbook-y16-wqxga-01.jpg" alt="Laptops">
+                    <h3>Laptops</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('monitors')">
+                    <img src="https://www.wootware.co.za/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/a/l/alienware-aw3225qf-2.jpg" alt="Monitors">
+                    <h3>Monitors</h3>
+                </div>
+                <div class="category-card" onclick="filterProducts('storage')">
+                    <img src="https://www.wootware.co.za/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/w/d/wd-blue-sa510-sata-2-5-ssd-1tb.jpg" alt="Storage">
+                    <h3>Storage</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="product-grid" id="product-grid">
+                <!-- Products will be loaded here via JavaScript -->
+            </div>
+        </div>
+    </section>
+	
+	
+	
+<!-- Auth Container in Header -->
+<div class="auth-container">
+  <button class="login-btn" id="login-btn">Login</button>
+  <div class="user-profile" id="user-profile" style="display: none;">
+    <div class="profile-toggle" id="profile-toggle">
+      <img src="https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png" 
+           alt="User" 
+           class="profile-img"
+           id="profile-img">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+    <div class="profile-dropdown">
+      <div class="profile-header">
+        <img src="https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png" 
+             alt="User" 
+             class="profile-large-img"
+             id="profile-large-img">
+        <div class="profile-info">
+          <h4 id="profile-fullname">User Name</h4>
+          <p id="profile-email">user@example.com</p>
+        </div>
+      </div>
+      <div class="profile-links">
+        <a href="#"><i class="fas fa-user"></i> My Profile</a>
+        <a href="#"><i class="fas fa-shopping-bag"></i> My Orders</a>
+        <a href="#"><i class="fas fa-heart"></i> Wishlist</a>
+        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+      </div>
+      <button class="logout-btn" id="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Login Modal -->
+<div class="auth-modal" id="login-modal">
+  <div class="auth-container">
+    <button class="close-auth" onclick="closeAuthModal()">&times;</button>
+    <h2>Welcome Back</h2>
+    <form id="login-form" class="auth-form">
+      <div class="form-group">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" required>
+      </div>
+      <div class="form-group">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" required>
+      </div>
+      <button type="submit" class="auth-btn">Login</button>
+    </form>
+    <p class="auth-switch">Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
+  </div>
+</div>
+
+<!-- Register Modal -->
+<div class="auth-modal" id="register-modal">
+  <div class="auth-container">
+    <button class="close-auth" onclick="closeAuthModal()">&times;</button>
+    <h2>Create Account</h2>
+    <form id="register-form" class="auth-form">
+      <div class="form-group">
+        <label for="register-name">Full Name</label>
+        <input type="text" id="register-name" required>
+      </div>
+      <div class="form-group">
+        <label for="register-email">Email</label>
+        <input type="email" id="register-email" required>
+      </div>
+      <div class="form-group">
+        <label for="register-password">Password</label>
+        <input type="password" id="register-password" required>
+      </div>
+      <div class="form-group">
+        <label for="register-confirm">Confirm Password</label>
+        <input type="password" id="register-confirm" required>
+      </div>
+      <button type="submit" class="auth-btn">Register</button>
+    </form>
+    <p class="auth-switch">Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+  </div>
+</div>
+
+<!-- User Profile Dropdown (added to header) -->
+<div class="user-profile" id="user-profile">
+  <div class="profile-toggle" id="profile-toggle">
+    <img src="https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png" alt="User" class="profile-img">
+    <span class="profile-name" id="profile-name">User</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
+  <div class="profile-dropdown">
+    <a href="#"><i class="fas fa-user"></i> My Profile</a>
+    <a href="#"><i class="fas fa-shopping-bag"></i> Orders</a>
+    <a href="#"><i class="fas fa-heart"></i> Wishlist</a>
+    <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+</div>	
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be loaded here -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Subtotal:</span>
+                <span class="total-amount">R0.00</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+            <button class="continue-shopping" onclick="toggleCart()">Continue Shopping</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h3>Subscribe to Our Newsletter</h3>
+                <p>Get the latest updates on new products and special offers</p>
+            </div>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col about-col">
+                    <h4>MPHEMBA MATRIX</h4>
+                    <p>Your trusted source for premium computer components and electronics since 2023.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Order Tracking</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col contact-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 6 Browning Rd, Salt River, Cape Town, 7925</li>
+                        <li><i class="fas fa-phone"></i> +27 21 123 4567</li>
+                        <li><i class="fas fa-envelope"></i> info@mphembamatrix.co.za</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MPHEMBA MATRIX. All Rights Reserved.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-apple-pay"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="matrixScript.js"></script>
+
+</body>
+</html>
