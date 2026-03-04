@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicken Licken - SoulFood Since 1981</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <style>
+        /* restaurant-improved.css */
+:root {
+    --cl-red: #E31837;
+    --cl-red-dark: #B1122B;
+    --cl-yellow: #FFC107;
+    --cl-yellow-dark: #E5A800;
+    --cl-black: #1C1C1C;
+    --cl-grey: #4A4A4A;
+    --cl-light-grey: #F5F5F5;
+    --cl-white: #FFFFFF;
+    --shadow: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', 'Arial', sans-serif;
+    background: var(--cl-black);
+    color: var(--cl-white);
+    overflow-x: hidden;
+}
+
+/* Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--cl-black);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s;
+}
+
+.loading-screen.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--cl-grey);
+    border-top-color: var(--cl-yellow);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(28, 28, 28, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    box-shadow: var(--shadow);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-logo img {
+    width: 40px;
+    height: 40px;
+}
+
+.logo-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--cl-yellow), var(--cl-red));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-link {
+    color: var(--cl-white);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: var(--transition);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--cl-yellow);
+    transition: var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cart-btn {
+    position: relative;
+    background: none;
+    border: none;
+    color: var(--cl-white);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.cart-btn:hover {
+    color: var(--cl-yellow);
+    transform: scale(1.1);
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--cl-red);
+    color: white;
+    font-size: 0.7rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--cl-white);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Cart Sidebar */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background: var(--cl-black);
+    border-left: 2px solid var(--cl-red);
+    z-index: 1001;
+    transition: right 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-sidebar.open {
+    right: 0;
+}
+
+.cart-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--cl-grey);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-header button {
+    background: none;
+    border: none;
+    color: var(--cl-white);
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.cart-footer {
+    padding: 20px;
+    border-top: 1px solid var(--cl-grey);
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--cl-red);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.checkout-btn:hover {
+    background: var(--cl-red-dark);
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero-section {
+    margin-top: 70px;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-slider {
+    height: 100%;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.4));
+}
+
+.slide-content {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    color: var(--cl-white);
+    z-index: 2;
+}
+
+.slide-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    animation: slideUp 0.5s;
+}
+
+.slide-content p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+.hero-btn {
+    padding: 15px 35px;
+    background: var(--cl-yellow);
+    color: var(--cl-black);
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hero-btn:hover {
+    background: var(--cl-yellow-dark);
+    transform: translateX(5px);
+}
+
+.slider-controls button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: var(--transition);
+}
+
+.slider-controls button:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.slider-prev { left: 20px; }
+.slider-next { right: 20px; }
+
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.dot.active {
+    background: var(--cl-yellow);
+    width: 30px;
+    border-radius: 10px;
+}
+
+/* Features Bar */
+.features-bar {
+    background: var(--cl-red);
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 0.95rem;
+}
+
+.feature i {
+    font-size: 1.2rem;
+}
+
+/* Section Titles */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 60px 0 40px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(to right, var(--cl-red), var(--cl-yellow));
+}
+
+/* Promo Carousel */
+.promo-section {
+    padding: 40px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.3s;
+    padding: 10px;
+}
+
+.promo-card {
+    min-width: 280px;
+    background: var(--cl-grey);
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    transition: var(--transition);
+}
+
+.promo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.promo-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.promo-card:hover img {
+    transform: scale(1.05);
+}
+
+.promo-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--cl-yellow);
+    color: var(--cl-black);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    z-index: 2;
+}
+
+.promo-card h3 {
+    padding: 15px 15px 5px;
+    font-size: 1.1rem;
+}
+
+.promo-card p {
+    padding: 0 15px;
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.promo-price {
+    padding: 10px 15px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--cl-yellow);
+}
+
+.add-to-cart-btn {
+    margin: 0 15px 15px;
+    padding: 10px;
+    width: calc(100% - 30px);
+    background: var(--cl-red);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.add-to-cart-btn:hover {
+    background: var(--cl-red-dark);
+    transform: translateY(-2px);
+}
+
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--cl-red);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: var(--transition);
+    opacity: 0.7;
+}
+
+.carousel-arrow:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-arrow.left { left: 0; }
+.carousel-arrow.right { right: 0; }
+
+/* Menu Section */
+.menu-section {
+    padding: 40px 20px;
+    background: var(--cl-black);
+}
+
+.menu-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 12px 25px;
+    background: var(--cl-grey);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+    background: var(--cl-yellow);
+    color: var(--cl-black);
+    transform: translateY(-2px);
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.menu-item {
+    background: var(--cl-grey);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.menu-item-image {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.menu-item:hover .menu-item-image img {
+    transform: scale(1.1);
+}
+
+.menu-item-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.menu-item:hover .menu-item-overlay {
+    opacity: 1;
+}
+
+.quick-view-btn {
+    padding: 12px 25px;
+    background: var(--cl-yellow);
+    color: var(--cl-black);
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transform: translateY(20px);
+    transition: var(--transition);
+}
+
+.menu-item:hover .quick-view-btn {
+    transform: translateY(0);
+}
+
+.menu-item-content {
+    padding: 20px;
+}
+
+.menu-item-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.menu-item-description {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.menu-item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-item-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--cl-yellow);
+}
+
+.menu-item-badge {
+    background: var(--cl-red);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+/* Locations Section */
+.locations-section {
+    padding: 40px 20px;
+    background: var(--cl-grey);
+}
+
+.locations-container {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.store-finder {
+    background: var(--cl-black);
+    border-radius: 15px;
+    padding: 20px;
+    height: fit-content;
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--cl-grey);
+    border-radius: 8px;
+    background: var(--cl-grey);
+    color: white;
+}
+
+.search-box input::placeholder {
+    color: #aaa;
+}
+
+.search-box button {
+    padding: 12px 20px;
+    background: var(--cl-red);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.search-box button:hover {
+    background: var(--cl-red-dark);
+}
+
+.store-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.store-item {
+    padding: 15px;
+    border-bottom: 1px solid var(--cl-grey);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.store-item:hover {
+    background: var(--cl-grey);
+    transform: translateX(5px);
+}
+
+.store-item h4 {
+    margin-bottom: 5px;
+    color: var(--cl-yellow);
+}
+
+.store-item p {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.store-item .distance {
+    color: var(--cl-yellow);
+    font-weight: 600;
+}
+
+.map-container {
+    height: 500px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 60px 20px;
+    background: var(--cl-black);
+}
+
+.testimonials-slider {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background: var(--cl-grey);
+    border-radius: 15px;
+    padding: 30px;
+    transition: var(--transition);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stars {
+    color: var(--cl-yellow);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.testimonial-card p {
+    color: #ccc;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.customer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.customer img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--cl-yellow);
+}
+
+.customer h4 {
+    margin-bottom: 3px;
+}
+
+.customer span {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+/* Footer */
+.footer {
+    background: #0a0a0a;
+    padding: 60px 20px 20px;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section img {
+    width: 60px;
+    margin-bottom: 15px;
+}
+
+.footer-section p {
+    color: #aaa;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    color: #aaa;
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    color: var(--cl-yellow);
+    transform: translateY(-3px);
+}
+
+.footer-section h4 {
+    margin-bottom: 20px;
+    color: var(--cl-yellow);
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li i {
+    margin-right: 10px;
+    color: var(--cl-red);
+}
+
+.footer-section a {
+    color: #aaa;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-section a:hover {
+    color: var(--cl-yellow);
+    padding-left: 5px;
+}
+
+.app-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.app-btn {
+    padding: 12px 20px;
+    background: var(--cl-grey);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.app-btn:hover {
+    background: var(--cl-red);
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--cl-grey);
+    color: #aaa;
+}
+
+.footer-bottom a {
+    color: #aaa;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-bottom a:hover {
+    color: var(--cl-yellow);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--cl-black);
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: modalSlideIn 0.3s;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2rem;
+    color: #aaa;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.close-modal:hover {
+    color: var(--cl-red);
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+/* Animations */
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .locations-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--cl-black);
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .nav-menu.show {
+        display: flex;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-content {
+        left: 5%;
+        right: 5%;
+        text-align: center;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .cart-sidebar {
+        width: 100%;
+    }
+    
+    .features-bar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-btn {
+        padding: 12px 25px;
+    }
+    
+    .promo-card {
+        min-width: 240px;
+    }
+    
+    .menu-tabs {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+    
+    .tab-btn {
+        width: 100%;
+    }
+}
+    </style>
+</head>
+<body>
+    
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+        <img src="https://chickenlicken.co.za/images/CL-small-logo.svg" alt="Chicken Licken">
+        <p>Loading SoulFood...</p>
+    </div>
+
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="https://chickenlicken.co.za/images/CL-small-logo.svg" alt="Chicken Licken">
+                <span class="logo-text">Chicken Licken</span>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#menu" class="nav-link">Menu</a>
+                <a href="#specials" class="nav-link">Specials</a>
+                <a href="#locations" class="nav-link">Locations</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <button class="menu-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Order</h3>
+            <button onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">R0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="proceedToCheckout()">
+                Proceed to Checkout <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+   
+    <section id="home" class="hero-section">
+        <div class="hero-slider" id="heroSlider">
+            <div class="slide active" style="background-image: url('images/hero1.jpg')">
+                <div class="slide-content">
+                    <h1>SoulFire Chicken</h1>
+                    <p>Spicy, Juicy, Perfectly Fried</p>
+                    <button class="hero-btn" onclick="document.getElementById('menu').scrollIntoView({behavior: 'smooth'})">
+                        Order Now <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('images/hero2.jpg')">
+                <div class="slide-content">
+                    <h1>Family Meals</h1>
+                    <p>Feed the whole family for less</p>
+                    <button class="hero-btn">View Deals</button>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('images/hero3.jpg')">
+                <div class="slide-content">
+                    <h1>New Hotwings Max</h1>
+                    <p>8 Hotwings + Toast + Coke - R92</p>
+                    <button class="hero-btn">Order Now</button>
+                </div>
+            </div>
+            
+            <div class="slider-controls">
+                <button class="slider-prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
+    
+    <div class="features-bar">
+        <div class="feature">
+            <i class="fas fa-clock"></i>
+            <span>Open 9am - 9pm</span>
+        </div>
+        <div class="feature">
+            <i class="fas fa-truck"></i>
+            <span>Free Delivery over R100</span>
+        </div>
+        <div class="feature">
+            <i class="fas fa-fire"></i>
+            <span>SoulFire Spice</span>
+        </div>
+        <div class="feature">
+            <i class="fas fa-star"></i>
+            <span>4.5 Rating</span>
+        </div>
+    </div>
+
+    
+    <section class="promo-section">
+        <h2 class="section-title">Today's Specials</h2>
+        <div class="carousel-container">
+            <button class="carousel-arrow left" onclick="scrollCarousel('promoCarousel', -1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="carousel" id="promoCarousel">
+                <div class="promo-card">
+                    <img src="images/demo2.png" alt="Salad">
+                    <div class="promo-badge">NEW</div>
+                    <h3>Salad Chicken</h3>
+                    <p>Fresh & Healthy</p>
+                    <div class="promo-price">R12.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Salad Chicken', 12.00, 'images/demo2.png')">
+                        <i class="fas fa-cart-plus"></i> Add
+                    </button>
+                </div>
+                <div class="promo-card">
+                    <img src="images/chick2.png" alt="Burgers">
+                    <div class="promo-badge">HOT</div>
+                    <h3>New Burger</h3>
+                    <p>Double Patty</p>
+                    <div class="promo-price">R75.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('New Burger', 75.00, 'images/chick2.png')">
+                        <i class="fas fa-cart-plus"></i> Add
+                    </button>
+                </div>
+                <div class="promo-card">
+                    <img src="images/demo3.png" alt="SoulBites">
+                    <div class="promo-badge">-20%</div>
+                    <h3>SoulBites</h3>
+                    <p>Crispy Chicken Bites</p>
+                    <div class="promo-price">R45.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('SoulBites', 45.00, 'images/demo3.png')">
+                        <i class="fas fa-cart-plus"></i> Add
+                    </button>
+                </div>
+                <div class="promo-card">
+                    <img src="images/demo4.png" alt="Sundae">
+                    <div class="promo-badge">NEW</div>
+                    <h3>Sundae Lick'n</h3>
+                    <p>Ice Cream Delight</p>
+                    <div class="promo-price">R25.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Sundae Lick\'n', 25.00, 'images/demo4.png')">
+                        <i class="fas fa-cart-plus"></i> Add
+                    </button>
+                </div>
+                <div class="promo-card">
+                    <img src="images/demo5.png" alt="Breakfast">
+                    <div class="promo-badge">BEST</div>
+                    <h3>Breakfast</h3>
+                    <p>Eggs, Bacon, Toast</p>
+                    <div class="promo-price">R68.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Breakfast', 68.00, 'images/demo5.png')">
+                        <i class="fas fa-cart-plus"></i> Add
+                    </button>
+                </div>
+                <div class="promo-card">
+                    <img src="images/demo1.png" alt="Pop Chicken">
+                    <div class="promo-badge">POP</div>
+                    <h3>Pop Chicken Shaker</h3>
+                    <p>Spicy Shake</p>
+                    <div class="promo-price">R30.00</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Pop Chicken Shaker', 30.00, 'images/demo1.png')">
+                        <i class="fas fa-cart-plus"></i> Add
+                    </button>
+                </div>
+            </div>
+            <button class="carousel-arrow right" onclick="scrollCarousel('promoCarousel', 1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    
+    <section id="menu" class="menu-section">
+        <h2 class="section-title">Our Famous Meals</h2>
+        
+        
+        <div class="menu-tabs">
+            <button class="tab-btn active" onclick="filterMenu('all')">All</button>
+            <button class="tab-btn" onclick="filterMenu('meals')">Meals</button>
+            <button class="tab-btn" onclick="filterMenu('burgers')">Burgers</button>
+            <button class="tab-btn" onclick="filterMenu('sides')">Sides</button>
+            <button class="tab-btn" onclick="filterMenu('drinks')">Drinks</button>
+        </div>
+
+        
+        <div class="menu-grid" id="menuGrid">
+            
+        </div>
+    </section>
+
+    
+    <section id="locations" class="locations-section">
+        <h2 class="section-title">Find Us Near You</h2>
+        <div class="locations-container">
+            <div class="store-finder">
+                <div class="search-box">
+                    <input type="text" id="addressSearch" placeholder="Enter your address or suburb">
+                    <button onclick="searchNearbyStores()">
+                        <i class="fas fa-search"></i> Find Stores
+                    </button>
+                </div>
+                <div class="store-list" id="storeList">
+                    
+                </div>
+            </div>
+            <div id="map" class="map-container"></div>
+        </div>
+    </section>
+
+    
+    <section class="testimonials-section">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="testimonials-slider">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>"Best chicken in town! The SoulFire sauce is absolutely amazing."</p>
+                <div class="customer">
+                    <img src="images/customer1.jpg" alt="Customer">
+                    <div>
+                        <h4>Thabo M.</h4>
+                        <span>Johannesburg</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>"Love their family meals. Great value for money and always fresh."</p>
+                <div class="customer">
+                    <img src="images/customer2.jpg" alt="Customer">
+                    <div>
+                        <h4>Sarah K.</h4>
+                        <span>Cape Town</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★☆</div>
+                <p>"Hotwings are perfectly spiced. Delivery is always on time."</p>
+                <div class="customer">
+                    <img src="images/customer3.jpg" alt="Customer">
+                    <div>
+                        <h4>Mike N.</h4>
+                        <span>Durban</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   >
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="https://chickenlicken.co.za/images/CL-small-logo.svg" alt="Chicken Licken">
+                <p>Serving SoulFood since 1981. Our secret recipe brings families together.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#locations">Locations</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> 0800 CHICKEN</li>
+                    <li><i class="fas fa-envelope"></i> info@chickenlicken.co.za</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Head Office: JHB, SA</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Download App</h4>
+                <div class="app-buttons">
+                    <button class="app-btn">
+                        <i class="fab fa-apple"></i> App Store
+                    </button>
+                    <button class="app-btn">
+                        <i class="fab fa-google-play"></i> Google Play
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Chicken Licken. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms</a></p>
+        </div>
+    </footer>
+
+   
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-body" id="modalBody">
+                
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <script>
+        // restaurant-improved.js
+
+// Global Variables
+let currentSlide = 0;
+let cart = [];
+let slideInterval;
+
+// Initialize on Load
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('loadingScreen').classList.add('hide');
+    }, 1500);
+    
+    initializeSlider();
+    loadMenuItems();
+    initializeStores();
+    setupScrollSpy();
+});
+
+// Initialize Hero Slider
+function initializeSlider() {
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('sliderDots');
+    
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = `dot ${index === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(index);
+        dotsContainer.appendChild(dot);
+    });
+    
+    startSlideShow();
+}
+
+function startSlideShow() {
+    slideInterval = setInterval(() => changeSlide(1), 5000);
+}
+
+function changeSlide(direction) {
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    
+    currentSlide = (currentSlide + direction + slides.length) % slides.length;
+    
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+}
+
+function goToSlide(index) {
+    clearInterval(slideInterval);
+    
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    
+    currentSlide = index;
+    
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+    
+    startSlideShow();
+}
+
+// Menu Items Data
+const menuItems = [
+    {
+        id: 1,
+        name: 'LUNCH Meal',
+        price: 75.00,
+        description: '2 pieces + toast + 300ml Coke',
+        image: 'images/meal1.png',
+        category: 'meals',
+        badge: 'Popular'
+    },
+    {
+        id: 2,
+        name: 'HOTWINGS MEAL MAX®',
+        price: 92.00,
+        description: '8 Hotwings® + toast + 440ml Coke',
+        image: 'images/meal2.png',
+        category: 'meals',
+        badge: 'Spicy'
+    },
+    {
+        id: 3,
+        name: 'SOULSISTER Party®',
+        price: 120.00,
+        description: '5 pieces + 2 regular Soul Fries™',
+        image: 'images/meal3.png',
+        category: 'meals',
+        badge: 'Family'
+    },
+    {
+        id: 4,
+        name: 'SOULSISTER®',
+        price: 43.00,
+        description: '2 pieces + Soul Fries™',
+        image: 'images/meal4.png',
+        category: 'meals',
+        badge: null
+    },
+    {
+        id: 5,
+        name: 'SOULSISTER Max®',
+        price: 65.00,
+        description: '2 pieces + Soul Fries™ + 440ml Coke',
+        image: 'images/meal5.png',
+        category: 'meals',
+        badge: 'Value'
+    },
+    {
+        id: 6,
+        name: 'Chicken INN®',
+        price: 150.00,
+        description: '9 pieces SoulFire® chicken',
+        image: 'images/meal6.png',
+        category: 'meals',
+        badge: 'Share'
+    },
+    {
+        id: 7,
+        name: 'FAMILY Barrel®',
+        price: 300.00,
+        description: '16 Hotwings®',
+        image: 'images/meal7.png',
+        category: 'meals',
+        badge: 'Party'
+    },
+    {
+        id: 8,
+        name: 'ROCK MY SOUL®',
+        price: 60.00,
+        description: '3 pieces + Soul Fries™ + SoulFire® sauce',
+        image: 'images/meal8.png',
+        category: 'meals',
+        badge: 'Special'
+    },
+    {
+        id: 9,
+        name: 'FAMILY Full House',
+        price: 170.00,
+        description: '8 pieces + 2 Soul Fries™ + 2 Soulslaw® + 2 Licken Loafs®',
+        image: 'images/meal9.png',
+        category: 'meals',
+        badge: 'Feast'
+    }
+];
+
+// Load Menu Items
+function loadMenuItems(filter = 'all') {
+    const menuGrid = document.getElementById('menuGrid');
+    menuGrid.innerHTML = '';
+    
+    const filteredItems = filter === 'all' ? menuItems : menuItems.filter(item => item.category === filter);
+    
+    filteredItems.forEach(item => {
+        const menuItem = document.createElement('div');
+        menuItem.className = 'menu-item';
+        menuItem.onclick = () => showQuickView(item);
+        
+        menuItem.innerHTML = `
+            <div class="menu-item-image">
+                <img src="${item.image}" alt="${item.name}">
+                <div class="menu-item-overlay">
+                    <button class="quick-view-btn" onclick="event.stopPropagation(); showQuickView(${JSON.stringify(item).replace(/"/g, '&quot;')})">
+                        <i class="fas fa-eye"></i> Quick View
+                    </button>
+                </div>
+            </div>
+            <div class="menu-item-content">
+                <h3 class="menu-item-title">${item.name}</h3>
+                <p class="menu-item-description">${item.description}</p>
+                <div class="menu-item-footer">
+                    <span class="menu-item-price">R${item.price.toFixed(2)}</span>
+                    ${item.badge ? `<span class="menu-item-badge">${item.badge}</span>` : ''}
+                </div>
+            </div>
+        `;
+        
+        menuGrid.appendChild(menuItem);
+    });
+}
+
+// Filter Menu
+function filterMenu(category) {
+    // Update active tab
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    loadMenuItems(category);
+}
+
+// Quick View Modal
+function showQuickView(item) {
+    const modal = document.getElementById('orderModal');
+    const modalBody = document.getElementById('modalBody');
+    
+    modalBody.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px; margin-bottom: 20px;">
+        <h2>${item.name}</h2>
+        <p style="color: #ccc; margin: 15px 0;">${item.description}</p>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
+            <span style="font-size: 2rem; color: var(--cl-yellow);">R${item.price.toFixed(2)}</span>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <button onclick="updateQuantity('modal', -1)" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: var(--cl-grey); color: white; cursor: pointer;">-</button>
+                <span id="modalQuantity" style="font-size: 1.2rem;">1</span>
+                <button onclick="updateQuantity('modal', 1)" style="width: 40px; height: 40px; border-radius: 50%; border: none; background: var(--cl-grey); color: white; cursor: pointer;">+</button>
+            </div>
+        </div>
+        <button class="checkout-btn" onclick="addToCart('${item.name}', ${item.price}, '${item.image}'); closeModal();" style="margin-top: 20px;">
+            <i class="fas fa-cart-plus"></i> Add to Cart
+        </button>
+    `;
+    
+    modal.classList.add('show');
+}
+
+function closeModal() {
+    document.getElementById('orderModal').classList.remove('show');
+}
+
+// Cart Functions
+function addToCart(name, price, image) {
+    const existingItem = cart.find(item => item.name === name);
+    
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        cart.push({
+            id: Date.now(),
+            name,
+            price,
+            image,
+            quantity: 1
+        });
+    }
+    
+    updateCartUI();
+    showNotification(`${name} added to cart!`);
+}
+
+function updateQuantity(itemId, delta) {
+    const item = cart.find(i => i.id === itemId);
+    if (item) {
+        item.quantity += delta;
+        if (item.quantity <= 0) {
+            cart = cart.filter(i => i.id !== itemId);
+        }
+    }
+    updateCartUI();
+}
+
+function removeFromCart(itemId) {
+    cart = cart.filter(item => item.id !== itemId);
+    updateCartUI();
+}
+
+function updateCartUI() {
+    const cartItems = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    const cartTotal = document.getElementById('cartTotal');
+    
+    // Update count
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCount.textContent = totalItems;
+    
+    // Update items
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<div class="empty-cart"><i class="fas fa-shopping-cart"></i><p>Your cart is empty</p></div>';
+    } else {
+        cartItems.innerHTML = cart.map(item => `
+            <div class="cart-item">
+                <img src="${item.image}" alt="${item.name}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
+                <div style="flex: 1;">
+                    <h4>${item.name}</h4>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 5px;">
+                        <span style="color: var(--cl-yellow);">R${item.price.toFixed(2)}</span>
+                        <div style="display: flex; gap: 5px; align-items: center;">
+                            <button onclick="updateQuantity(${item.id}, -1)" style="width: 30px; height: 30px; border-radius: 50%; border: none; background: var(--cl-grey); color: white; cursor: pointer;">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)" style="width: 30px; height: 30px; border-radius: 50%; border: none; background: var(--cl-grey); color: white; cursor: pointer;">+</button>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="removeFromCart(${item.id})" style="background: none; border: none; color: var(--cl-red); cursor: pointer;">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `).join('');
+    }
+    
+    // Update total
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    cartTotal.textContent = `R${total.toFixed(2)}`;
+}
+
+function toggleCart() {
+    document.getElementById('cartSidebar').classList.toggle('open');
+}
+
+// Notification System
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        background: var(--cl-yellow);
+        color: var(--cl-black);
+        padding: 15px 25px;
+        border-radius: 8px;
+        font-weight: 600;
+        z-index: 2000;
+        animation: slideIn 0.3s;
+    `;
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+// Carousel Scroll
+function scrollCarousel(carouselId, direction) {
+    const carousel = document.getElementById(carouselId);
+    const scrollAmount = 320 * direction;
+    carousel.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+    });
+}
+
+// Mobile Menu Toggle
+function toggleMobileMenu() {
+    document.getElementById('navMenu').classList.toggle('show');
+}
+
+// Scroll Spy
+function setupScrollSpy() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.clientHeight;
+            
+            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+}
+
+// Store Locations
+const chickenLickenStores = [
+    { name: "Chicken Licken Braamfontein", lat: -26.1931, lng: 28.0301, address: "123 Jorissen St, Braamfontein", phone: "011 123 4567" },
+    { name: "Chicken Licken Sandton", lat: -26.1076, lng: 28.0567, address: "Maude St, Sandton", phone: "011 234 5678" },
+    { name: "Chicken Licken Soweto", lat: -26.2485, lng: 27.8540, address: "Chris Hani Rd, Soweto", phone: "011 345 6789" },
+    { name: "Chicken Licken Pretoria", lat: -25.7461, lng: 28.1881, address: "Church St, Pretoria", phone: "012 345 6789" },
+    { name: "Chicken Licken Cape Town", lat: -33.9249, lng: 18.4241, address: "Adderley St, Cape Town", phone: "021 123 4567" },
+    { name: "Chicken Licken Durban", lat: -29.8587, lng: 31.0218, address: "West St, Durban", phone: "031 234 5678" }
+];
+
+let map;
+let userMarker;
+let storeMarkers = [];
+
+function initializeStores() {
+    map = L.map('map').setView([-28.4793, 24.6727], 5);
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+    
+    // Add store markers
+    chickenLickenStores.forEach(store => {
+        const marker = L.marker([store.lat, store.lng]).addTo(map)
+            .bindPopup(`
+                <b>${store.name}</b><br>
+                ${store.address}<br>
+                Phone: ${store.phone}
+            `);
+        storeMarkers.push(marker);
+    });
+    
+    // Populate store list
+    const storeList = document.getElementById('storeList');
+    chickenLickenStores.forEach(store => {
+        const storeItem = document.createElement('div');
+        storeItem.className = 'store-item';
+        storeItem.onclick = () => focusStore(store);
+        storeItem.innerHTML = `
+            <h4>${store.name}</h4>
+            <p><i class="fas fa-map-marker-alt"></i> ${store.address}</p>
+            <p><i class="fas fa-phone"></i> ${store.phone}</p>
+            <span class="distance">Click to view</span>
+        `;
+        storeList.appendChild(storeItem);
+    });
+}
+
+function focusStore(store) {
+    map.setView([store.lat, store.lng], 15);
+    storeMarkers.forEach(marker => {
+        if (marker.getLatLng().lat === store.lat && marker.getLatLng().lng === store.lng) {
+            marker.openPopup();
+        }
+    });
+}
+
+async function searchNearbyStores() {
+    const address = document.getElementById('addressSearch').value;
+    if (!address) return;
+    
+    try {
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
+        const data = await response.json();
+        
+        if (data.length > 0) {
+            const userLat = parseFloat(data[0].lat);
+            const userLng = parseFloat(data[0].lon);
+            
+            if (userMarker) {
+                map.removeLayer(userMarker);
+            }
+            
+            userMarker = L.marker([userLat, userLng]).addTo(map)
+                .bindPopup('Your location').openPopup();
+            
+            map.setView([userLat, userLng], 12);
+            
+            // Calculate and display distances
+            calculateDistances(userLat, userLng);
+        }
+    } catch (error) {
+        alert('Error finding location. Please try again.');
+    }
+}
+
+function calculateDistances(userLat, userLng) {
+    const storeItems = document.querySelectorAll('.store-item');
+    
+    chickenLickenStores.forEach((store, index) => {
+        const distance = calculateDistance(
+            userLat, userLng,
+            store.lat, store.lng
+        );
+        
+        storeItems[index].querySelector('.distance').textContent = 
+            `${distance.toFixed(1)} km away`;
+    });
+}
+
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+}
+
+// Checkout
+function proceedToCheckout() {
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+    
+    // Store cart in sessionStorage for map page
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+    sessionStorage.setItem('orderTotal', cart.reduce((sum, item) => sum + (item.price * item.quantity), 0));
+    
+    // Redirect to map page
+    window.location.href = 'map.html';
+}
+
+// Smooth Scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+    </script>
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+

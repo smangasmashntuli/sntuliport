@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col, Button, Badge } from 'react-bootstrap';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import './Projects.css';
 
 function Projects() {
@@ -11,7 +12,7 @@ function Projects() {
     {
       title: 'Mpheba Matrix',
       description: 'An e-commerce platform for computer components with user authentication, product filtering, and payment integration.',
-      image: '../images/Screenshot 2025-05-24 231333.png',
+      image: '/images/Screenshot 2025-05-24 231333.png',
       category: 'fullstack',
       technologies: ['React', 'CSS3', 'JavaScript'],
       liveLink: '/projects/mphemba-matrix',
@@ -21,7 +22,7 @@ function Projects() {
     {
       title: 'Car Voting App',
       description: 'Interactive application for car enthusiasts to vote and compare different car models with real-time results visualization.',
-      image: '../images/Screenshot 2025-05-22 232344.png',
+      image: '/images/Screenshot 2025-05-22 232344.png',
       category: 'frontend',
       technologies: ['React', 'Chart.js', 'CSS3', 'JavaScript'],
       liveLink: '/projects/car-voting',
@@ -31,7 +32,7 @@ function Projects() {
     {
       title: 'Health Aid Chatbot',
       description: 'AI-powered chatbot providing preliminary health advice and symptom analysis with integration to healthcare providers.',
-      image: '../images/Screenshot 2025-05-26 165242.png',
+      image: '/images/Screenshot 2025-05-26 165242.png',
       category: 'fullstack',
       technologies: ['React', 'Gemini AI', 'CSS3', 'JavaScript'],
       liveLink: '/projects/health-chatbot',
@@ -41,7 +42,7 @@ function Projects() {
     {
       title: 'Chicken Licken Clone',
       description: 'Responsive restaurant website with menu filtering, online ordering system, and location finder.',
-      image: '../images/Screenshot 2025-02-12 152328.png',
+      image: '/images/Screenshot 2025-02-12 152328.png',
       category: 'frontend',
       technologies: ['React', 'CSS3', 'JavaScript'],
       liveLink: '/projects/chicken-licken',
@@ -51,7 +52,7 @@ function Projects() {
     {
       title: 'TeachWave Learning Platform',
       description: 'Responsive learning platform with subject management, learner progress tracking, and interactive learning tools.',
-      image: '../images/Screenshot 2026-02-26 204210.png',
+      image: '/images/Screenshot 2026-02-26 204210.png',
       category: 'fullstack',
       technologies: ['React', 'Tailwind CSS', 'TypeScript', 'MySQL', 'Express'],
       liveLink: 'https://github.com/smangasmashntuli/teachwave-pro',
@@ -117,15 +118,13 @@ function Projects() {
                   <div className="project-overlay">
                     <div className="project-links">
                       {project.isInternal ? (
-                        <a 
-                          href={project.liveLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <Link 
+                          to={project.liveLink}
                           className="project-link"
                           aria-label="Live Demo"
                         >
                           <FaExternalLinkAlt />
-                        </a>
+                        </Link>
                       ) : (
                         <a 
                           href={project.liveLink} 
