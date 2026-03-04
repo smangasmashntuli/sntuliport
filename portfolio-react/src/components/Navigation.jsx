@@ -35,7 +35,7 @@ function Navigation() {
     >
       <Container>
         <Navbar.Brand href="#home" className="navbar-brand-custom">
-          <span className="logo-text gradient-text">SN</span>
+          <span className="logo-text gradient-text">SM</span>
         </Navbar.Brand>
         
         <Navbar.Toggle aria-controls="navbar-nav" className="custom-toggler">

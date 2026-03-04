@@ -33,7 +33,7 @@ function App() {
   }
 
   return (
-    <Router>
+    <Router basename="/sntuliport">
       <Routes>
         {/* Main Portfolio Route */}
         <Route path="/" element={
