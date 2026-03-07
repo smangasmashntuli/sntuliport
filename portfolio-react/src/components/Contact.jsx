@@ -14,7 +14,12 @@ function Contact() {
   const [status, setStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const sectionRef = useRef(null);
-  const formRef = useRef(null);
+
+  // Initialize EmailJS with public key on component mount
+  useEffect(() => {
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'T6J-c0x0LmbsYD8Zu';
+    emailjs.init(publicKey);
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -32,7 +37,6 @@ function Contact() {
       // EmailJS configuration
       const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_v7a41qa';
       const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_nz8xqf5';
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'T6J-c0x0LmbsYD8Zu';
 
       // Send email using EmailJS
       await emailjs.send(
@@ -44,8 +48,7 @@ function Contact() {
           subject: formData.subject,
           message: formData.message,
           to_name: 'Simangaliso',
-        },
-        publicKey
+        }
       );
 
       setStatus('success');
