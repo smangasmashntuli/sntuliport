@@ -1,6 +1,6 @@
 // RapidAPI.js - Service layer for RapidAPI calls
-const RAPIDAPI_KEY = import.meta.env.VITE_RAPIDAPI_KEY || process.env.VITE_RAPIDAPI_KEY;
-const EBAY_RAPIDAPI_KEY = import.meta.env.VITE_EBAY_RAPIDAPI_KEY || process.env.VITE_EBAY_RAPIDAPI_KEY;
+const RAPIDAPI_KEY = import.meta.env.VITE_RAPIDAPI_KEY;
+const EBAY_RAPIDAPI_KEY = import.meta.env.VITE_EBAY_RAPIDAPI_KEY;
 
 // Export for debugging
 export { RAPIDAPI_KEY, EBAY_RAPIDAPI_KEY };
