@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin, FaFacebook, FaTwitter } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
 import './Contact.css';
 
 function Contact() {
@@ -13,6 +14,7 @@ function Contact() {
   const [status, setStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const sectionRef = useRef(null);
+  const formRef = useRef(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -27,22 +29,27 @@ function Contact() {
     setStatus('');
 
     try {
-      const response = await fetch('http://localhost:5500/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      // EmailJS configuration
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_v7a41qa';
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_nz8xqf5';
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'T6J-c0x0LmbsYD8Zu';
+
+      // Send email using EmailJS
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_name: 'Simangaliso',
         },
-        body: JSON.stringify(formData),
-      });
+        publicKey
+      );
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        setStatus('error');
-      }
+      setStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       console.error('Error submitting form:', error);
       setStatus('error');
