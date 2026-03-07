@@ -12,7 +12,7 @@ function Projects() {
     {
       title: 'Mpheba Matrix',
       description: 'An e-commerce platform for computer components with user authentication, product filtering, and payment integration.',
-      image: '/images/Screenshot 2025-05-24 231333.png',
+      image: `${import.meta.env.BASE_URL}images/Screenshot 2025-05-24 231333.png`,
       category: 'fullstack',
       technologies: ['React', 'CSS3', 'JavaScript'],
       liveLink: '/projects/mphemba-matrix',
@@ -22,7 +22,7 @@ function Projects() {
     {
       title: 'Car Voting App',
       description: 'Interactive application for car enthusiasts to vote and compare different car models with real-time results visualization.',
-      image: '/images/Screenshot 2025-05-22 232344.png',
+      image: `${import.meta.env.BASE_URL}images/Screenshot 2025-05-22 232344.png`,
       category: 'frontend',
       technologies: ['React', 'Chart.js', 'CSS3', 'JavaScript'],
       liveLink: '/projects/car-voting',
@@ -32,7 +32,7 @@ function Projects() {
     {
       title: 'Health Aid Chatbot',
       description: 'AI-powered chatbot providing preliminary health advice and symptom analysis with integration to healthcare providers.',
-      image: '/images/Screenshot 2025-05-26 165242.png',
+      image: `${import.meta.env.BASE_URL}images/Screenshot 2025-05-26 165242.png`,
       category: 'fullstack',
       technologies: ['React', 'Gemini AI', 'CSS3', 'JavaScript'],
       liveLink: '/projects/health-chatbot',
