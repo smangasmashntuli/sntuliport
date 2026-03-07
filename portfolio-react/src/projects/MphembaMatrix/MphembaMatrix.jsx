@@ -70,11 +70,11 @@ export default function MphembaMatrix() {
 
   // Hero slider images
   const heroSlides = [
-    { src: '/images/amd-crimson-desert-bundle-woot.jpg', alt: 'AMD Crimson Desert Bundle' },
-    { src: '/images/amd-ryzen7-9850x3d-woot.jpg', alt: 'AMD Ryzen 7 9850X3D' },
-    { src: '/images/asus-rer-bundle-woot.jpg', alt: 'ASUS Bundle' },
-    { src: '/images/msi-rer-bundle-woot.jpg', alt: 'MSI Bundle' },
-    { src: '/images/nvgf-rerb-50series-woot.jpg', alt: 'NVIDIA GeForce 50 Series' }
+    { src: `${import.meta.env.BASE_URL}images/amd-crimson-desert-bundle-woot.jpg`, alt: 'AMD Crimson Desert Bundle' },
+    { src: `${import.meta.env.BASE_URL}images/amd-ryzen7-9850x3d-woot.jpg`, alt: 'AMD Ryzen 7 9850X3D' },
+    { src: `${import.meta.env.BASE_URL}images/asus-rer-bundle-woot.jpg`, alt: 'ASUS Bundle' },
+    { src: `${import.meta.env.BASE_URL}images/msi-rer-bundle-woot.jpg`, alt: 'MSI Bundle' },
+    { src: `${import.meta.env.BASE_URL}images/nvgf-rerb-50series-woot.jpg`, alt: 'NVIDIA GeForce 50 Series' }
   ];
 
   // Fetch all products on component mount

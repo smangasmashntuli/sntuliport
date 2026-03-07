@@ -42,7 +42,7 @@ function Projects() {
     {
       title: 'Chicken Licken Clone',
       description: 'Responsive restaurant website with menu filtering, online ordering system, and location finder.',
-      image: '/images/Screenshot 2025-02-12 152328.png',
+      image: `${import.meta.env.BASE_URL}images/Screenshot 2025-02-12 152328.png`,
       category: 'frontend',
       technologies: ['React', 'CSS3', 'JavaScript'],
       liveLink: '/projects/chicken-licken',
@@ -52,7 +52,7 @@ function Projects() {
     {
       title: 'TeachWave Learning Platform',
       description: 'Responsive learning platform with subject management, learner progress tracking, and interactive learning tools.',
-      image: '/images/Screenshot 2026-02-26 204210.png',
+      image: `${import.meta.env.BASE_URL}images/Screenshot 2026-02-26 204210.png`,
       category: 'fullstack',
       technologies: ['React', 'Tailwind CSS', 'TypeScript', 'MySQL', 'Express'],
       liveLink: 'https://github.com/smangasmashntuli/teachwave-pro',

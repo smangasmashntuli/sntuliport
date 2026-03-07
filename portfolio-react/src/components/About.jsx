@@ -37,7 +37,7 @@ function About() {
             <div className="about-image-wrapper animate-on-scroll">
               <div className="image-bg-shape"></div>
               <img 
-                src="/images/334066167_148732571438811_7406887273882172408_n.jpg" 
+                src={`${import.meta.env.BASE_URL}images/334066167_148732571438811_7406887273882172408_n.jpg`}
                 alt="Simangaliso working" 
                 className="about-image"
               />

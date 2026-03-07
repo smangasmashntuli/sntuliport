@@ -162,7 +162,7 @@ function CarVoting() {
 
       {/* Developer Profile */}
       <section className="developer-profile">
-        <img src="/images/334066167_148732571438811_7406887273882172408_n.jpg" alt="Developer" className="developer-image" />
+        <img src={`${import.meta.env.BASE_URL}images/334066167_148732571438811_7406887273882172408_n.jpg`} alt="Developer" className="developer-image" />
         <div className="developer-info">
           <h2>Simangaliso Mazweni Ntuli</h2>
           <p className="developer-title">Front-End Developer</p>

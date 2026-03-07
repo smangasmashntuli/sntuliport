@@ -9,7 +9,7 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 const promoItems = [
   {
     id: 1,
-    image: '/images/demo2.png',
+    image: `${import.meta.env.BASE_URL}images/demo2.png`,
     name: 'Salad Chicken',
     price: 12.00,
     badge: 'NEW',
@@ -17,7 +17,7 @@ const promoItems = [
   },
   {
     id: 2,
-    image: '/images/chick2.png',
+    image: `${import.meta.env.BASE_URL}images/chick2.png`,
     name: 'New Burger',
     price: 75.00,
     badge: 'HOT',
@@ -25,7 +25,7 @@ const promoItems = [
   },
   {
     id: 3,
-    image: '/images/demo3.png',
+    image: `${import.meta.env.BASE_URL}images/demo3.png`,
     name: 'SoulBites',
     price: 45.00,
     badge: '-20%',
@@ -33,7 +33,7 @@ const promoItems = [
   },
   {
     id: 4,
-    image: '/images/demo4.png',
+    image: `${import.meta.env.BASE_URL}images/demo4.png`,
     name: "Sundae Lick'n",
     price: 25.00,
     badge: 'NEW',
@@ -41,7 +41,7 @@ const promoItems = [
   },
   {
     id: 5,
-    image: '/images/demo5.png',
+    image: `${import.meta.env.BASE_URL}images/demo5.png`,
     name: 'Breakfast',
     price: 68.00,
     badge: 'BEST',
@@ -49,7 +49,7 @@ const promoItems = [
   },
   {
     id: 6,
-    image: '/images/demo1.png',
+    image: `${import.meta.env.BASE_URL}images/demo1.png`,
     name: 'Pop Chicken Shaker',
     price: 30.00,
     badge: 'POP',
@@ -63,7 +63,7 @@ const menuItems = [
     name: 'LUNCH Meal',
     price: 75.00,
     description: '2 pieces + toast + 300ml Coke',
-    image: '/images/meal1.png',
+    image: `${import.meta.env.BASE_URL}images/meal1.png`,
     category: 'meals',
     badge: 'Popular'
   },
@@ -72,7 +72,7 @@ const menuItems = [
     name: 'HOTWINGS MEAL MAX®',
     price: 92.00,
     description: '8 Hotwings® + toast + 440ml Coke',
-    image: '/images/meal2.png',
+    image: `${import.meta.env.BASE_URL}images/meal2.png`,
     category: 'meals',
     badge: 'Spicy'
   },
@@ -81,7 +81,7 @@ const menuItems = [
     name: 'SOULSISTER Party®',
     price: 120.00,
     description: '5 pieces + 2 regular Soul Fries™',
-    image: '/images/meal3.png',
+    image: `${import.meta.env.BASE_URL}images/meal3.png`,
     category: 'meals',
     badge: 'Family'
   },
@@ -90,7 +90,7 @@ const menuItems = [
     name: 'SOULSISTER®',
     price: 43.00,
     description: '2 pieces + Soul Fries™',
-    image: '/images/meal4.png',
+    image: `${import.meta.env.BASE_URL}images/meal4.png`,
     category: 'meals',
     badge: null
   },
@@ -99,7 +99,7 @@ const menuItems = [
     name: 'SOULSISTER Max®',
     price: 65.00,
     description: '2 pieces + Soul Fries™ + 440ml Coke',
-    image: '/images/meal5.png',
+    image: `${import.meta.env.BASE_URL}images/meal5.png`,
     category: 'meals',
     badge: 'Value'
   },
@@ -108,7 +108,7 @@ const menuItems = [
     name: 'Chicken INN®',
     price: 150.00,
     description: '9 pieces SoulFire® chicken',
-    image: '/images/meal6.png',
+    image: `${import.meta.env.BASE_URL}images/meal6.png`,
     category: 'meals',
     badge: 'Share'
   },
@@ -117,7 +117,7 @@ const menuItems = [
     name: 'FAMILY Barrel®',
     price: 300.00,
     description: '16 Hotwings®',
-    image: '/images/meal7.png',
+    image: `${import.meta.env.BASE_URL}images/meal7.png`,
     category: 'meals',
     badge: 'Party'
   },
@@ -126,7 +126,7 @@ const menuItems = [
     name: 'ROCK MY SOUL®',
     price: 60.00,
     description: '3 pieces + Soul Fries™ + SoulFire® sauce',
-    image: '/images/meal8.png',
+    image: `${import.meta.env.BASE_URL}images/meal8.png`,
     category: 'meals',
     badge: 'Special'
   },
@@ -135,7 +135,7 @@ const menuItems = [
     name: 'FAMILY Full House',
     price: 170.00,
     description: '8 pieces + 2 Soul Fries™ + 2 Soulslaw® + 2 Licken Loafs®',
-    image: '/images/meal9.png',
+    image: `${import.meta.env.BASE_URL}images/meal9.png`,
     category: 'meals',
     badge: 'Feast'
   }
@@ -144,19 +144,19 @@ const menuItems = [
 const heroSlides = [
   {
     id: 1,
-    image: '/images/chick2.png',
+    image: `${import.meta.env.BASE_URL}images/chick2.png`,
     title: 'SoulFire Chicken',
     description: 'Spicy, Juicy, Perfectly Fried'
   },
   {
     id: 2,
-    image: '/images/meal6.png',
+    image: `${import.meta.env.BASE_URL}images/meal6.png`,
     title: 'Family Meals',
     description: 'Feed the whole family for less'
   },
   {
     id: 3,
-    image: '/images/meal2.png',
+    image: `${import.meta.env.BASE_URL}images/meal2.png`,
     title: 'New Hotwings Max',
     description: '8 Hotwings + Toast + Coke - R92'
   }
