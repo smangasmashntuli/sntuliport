@@ -190,14 +190,16 @@
   font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.6;
-  margin-bottom: 1.5rem;
-  flex: 1;
+  margin-bottom: 1rem;
 }
 
 .project-tech {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(99, 102, 241, 0.1);
 }
 
 .tech-badge {
