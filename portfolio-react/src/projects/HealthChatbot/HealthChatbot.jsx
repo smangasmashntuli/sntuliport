@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import './HealthChatbot.css';
 
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-const API_VERSION = import.meta.env.VITE_API_VERSION || 'v1beta';
-const MODEL_NAME = import.meta.env.VITE_MODEL_NAME || 'gemini-1.5-flash-latest';
+const API_VERSION = 'v1';
+const MODEL_NAME = 'gemini-1.5-flash';
 const API_ENDPOINT = `https://generativelanguage.googleapis.com/${API_VERSION}/models/${MODEL_NAME}:generateContent?key=${API_KEY}`;
 const MAX_HISTORY_LENGTH = 10;
 
