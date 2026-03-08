@@ -1,12 +1,12 @@
 // RapidAPI.js - Service layer for RapidAPI calls
-const RAPIDAPI_KEY = import.meta.env.VITE_RAPIDAPI_KEY;
-const EBAY_RAPIDAPI_KEY = import.meta.env.VITE_EBAY_RAPIDAPI_KEY;
+const RAPIDAPI_KEY = import.meta.env.VITE_RAPIDAPI_KEY || '';
+const EBAY_RAPIDAPI_KEY = import.meta.env.VITE_EBAY_RAPIDAPI_KEY || '';
 
 // Export for debugging
 export { RAPIDAPI_KEY, EBAY_RAPIDAPI_KEY };
 
 // Debug: Log API key status
-console.log('RapidAPI Key loaded:', RAPIDAPI_KEY ? '✓ Yes (length: ' + RAPIDAPI_KEY.length + ')' : '✗ No - Please add VITE_RAPIDAPI_KEY to .env file');
+console.log('RapidAPI Key loaded:', RAPIDAPI_KEY && RAPIDAPI_KEY !== 'your_rapidapi_key_here' ? '✓ Yes (length: ' + RAPIDAPI_KEY.length + ')' : '✗ No - Please add VITE_RAPIDAPI_KEY to .env file');
 if (RAPIDAPI_KEY && RAPIDAPI_KEY !== 'your_rapidapi_key_here') {
   console.log('RapidAPI Key preview:', RAPIDAPI_KEY.substring(0, 8) + '...');
 } else {
