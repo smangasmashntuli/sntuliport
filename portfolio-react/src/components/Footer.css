@@ -149,7 +149,7 @@
 }
 
 .heart-icon {
-  color: #ef4444;
+  color: var(--gold-light);
   animation: heartbeat 1.5s ease-in-out infinite;
 }
 
