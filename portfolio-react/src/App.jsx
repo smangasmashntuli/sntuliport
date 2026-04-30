@@ -11,7 +11,6 @@ import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
 import Loader from './components/Loader';
 import ParallaxBackground from './components/ParallaxBackground';
-import MouseFollower from './components/MouseFollower';
 import MphembaMatrix from './projects/MphembaMatrix/MphembaMatrix';
 import CarVoting from './projects/CarVoting/CarVoting';
 import HealthChatbot from './projects/HealthChatbot/HealthChatbot';
@@ -28,6 +27,30 @@ function App() {
     }, 2000);
   }, []);
 
+  useEffect(() => {
+    // Initialize Lenis smooth scroll + GSAP ScrollTrigger wiring
+    let Lenis;
+    let lenis;
+    try {
+      // dynamic import to avoid SSR issues
+      import('lenis').then(mod => {
+        Lenis = mod.default;
+        lenis = new Lenis({ duration: 1.2, smooth: true, smoothTouch: false });
+
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+      }).catch(() => {});
+    } catch (e) {
+      // ignore if not available
+    }
+    return () => {
+      if (lenis && lenis.destroy) lenis.destroy();
+    };
+  }, []);
+
   if (loading) {
     return <Loader />;
   }
@@ -39,7 +62,7 @@ function App() {
         <Route path="/" element={
           <div className="App">
             <ParallaxBackground />
-            <MouseFollower />
+            <div className="noise-overlay" />
             <Navigation />
             <Hero />
             <About />
