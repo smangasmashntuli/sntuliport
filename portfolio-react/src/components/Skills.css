@@ -1,154 +1,105 @@
-.skills-section {
-  background: var(--darker-bg);
-  position: relative;
-  overflow: hidden;
-}
-
-.skill-category {
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  padding: 2rem;
-  height: 100%;
-  transition: all 0.3s ease;
+.skills-slideshow-section {
+  background: transparent;
+  padding: 0;
   position: relative;
 }
 
-.skill-category:hover {
-  transform: translateY(-5px);
-  border-color: rgba(99, 102, 241, 0.3);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.category-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.category-title {
-  font-size: 1.15rem !important;
-  font-weight: 700 !important;
-  color: #fff !important;
-  margin: 0;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.category-icon {
-  font-size: 1.5rem;
-  opacity: 0.7;
-  color: rgba(99, 102, 241, 0.8);
+.slideshow-strip {
+  height: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  border-top: 1px solid rgba(200, 165, 92, 0.12);
+  border-bottom: 1px solid rgba(200, 165, 92, 0.12);
+  background: rgba(5, 5, 5, 0.8);
 }
 
-.skills-list {
+.slides {
+  overflow: hidden;
+  width: 100%;
+  max-width: 900px;
+}
+
+.slides-inner {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  transition: transform 0.6s cubic-bezier(0.2,0.8,0.2,1);
 }
 
-.skill-item {
-  transition: all 0.3s ease;
-}
-
-.skill-item:hover {
-  transform: translateX(3px);
-}
-
-.skill-header {
+.slide {
+  min-width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 0.6rem;
+  padding: 0 12px;
 }
 
-.skill-info {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.skill-icon {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-  opacity: 0.85;
-  transition: all 0.3s ease;
-  filter: grayscale(20%);
-}
-
-.skill-item:hover .skill-icon {
-  opacity: 1;
-  transform: scale(1.1);
-  filter: grayscale(0%);
+.skill-pill {
+  min-width: 280px;
+  background: rgba(17,17,17,0.55);
+  border: 1px solid rgba(200,165,92,0.18);
+  padding: 10px 20px;
+  border-radius: 999px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
 }
 
 .skill-name {
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
   color: var(--text-primary);
+  margin-bottom: 2px;
 }
 
-.skill-percentage {
+.skill-cat {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── MARQUEE BAND ── */
+.marquee-band {
+  position: relative;
+  z-index: 2;
+  background: var(--primary-color);
+  padding: 14px 0;
+  overflow: hidden;
+  display: flex;
+}
+.marquee-track {
+  display: flex;
+  gap: 0;
+  animation: marquee 22s linear infinite;
+  white-space: nowrap;
+}
+.marquee-item {
+  font-family: Inter, system-ui, sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
-  color: rgba(99, 102, 241, 0.9);
-  min-width: 45px;
-  text-align: right;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #111;
+  padding: 0 32px;
+}
+.marquee-dot {
+  color: #111;
+  opacity: 0.4;
 }
 
-.custom-progress {
-  height: 6px !important;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  overflow: hidden;
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-33.333%); }
 }
 
-.custom-progress .progress-bar {
-  background: linear-gradient(90deg, rgba(99, 102, 241, 0.8), rgba(99, 102, 241, 1));
-  border-radius: 10px;
-  transition: width 1.2s ease-out;
-  position: relative;
-  height: 6px !important;
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
-  .skill-category {
-    padding: 1.5rem;
+  .slideshow-strip {
+    height: 92px;
   }
-  
-  .category-title {
-    font-size: 1.05rem !important;
-    color: #fff !important;
+  .skill-pill {
+    min-width: 220px;
+    padding: 8px 14px;
   }
-  
-  .category-icon {
-    font-size: 1.3rem;
-  }
-  
-  .skill-icon {
-    width: 26px;
-    height: 26px;
-  }
-  
-  .skill-name {
-    font-size: 0.9rem;
-  }
-  
-  .custom-progress {
-    height: 5px !important;
-  }
-  
-  .custom-progress .progress-bar {
-    height: 5px !important;
-  }
+  .skill-name { font-size: 1.05rem; }
+  .marquee-item { padding: 0 18px; font-size: 0.7rem; }
 }
