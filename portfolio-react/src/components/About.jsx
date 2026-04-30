@@ -121,7 +121,7 @@ function About() {
               
               <div className="about-actions">
                 <a 
-                  href="https://drive.google.com/file/d/1oFI6_JxID8IZA_QqNrQKKMwYi9xf99n7/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1Twqqwd4PnnbsutIXzplyuaIAAR2B6Qbt/view?usp=drive_link"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
