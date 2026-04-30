@@ -39,7 +39,7 @@
   margin-bottom: 1rem;
   line-height: 0.95;
   animation: fadeInUp 1s ease-out 0.4s both;
-  color: #ffffff;
+  color: var(--cream);
 }
 
 .hero-title {
@@ -93,7 +93,7 @@
 
 .social-icon:hover {
   background: var(--gradient-primary);
-  color: white;
+  color: var(--ink);
   transform: translateY(-5px);
   box-shadow: var(--shadow-md);
   border-color: transparent;
