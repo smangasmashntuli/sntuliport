@@ -1,41 +1,27 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Container, Row, Col, Button, Badge } from 'react-bootstrap';
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import './Projects.css';
 
 function Projects() {
-  const [filter, setFilter] = useState('all');
   const sectionRef = useRef(null);
 
   const projects = [
     {
-      title: 'Mpheba Matrix',
-      description: 'An e-commerce platform for computer components with user authentication, product filtering, and payment integration.',
-      image: `${import.meta.env.BASE_URL}images/Screenshot 2025-05-24 231333.png`,
-      category: 'fullstack',
-      technologies: ['React', 'CSS3', 'JavaScript'],
-      liveLink: '/projects/mphemba-matrix',
-      githubLink: 'https://github.com/smangasmashntuli/sntuliport',
-      isInternal: true
-    },
-    {
-      title: 'Car Voting App',
-      description: 'Interactive application for car enthusiasts to vote and compare different car models with real-time results visualization.',
-      image: `${import.meta.env.BASE_URL}images/Screenshot 2025-05-22 232344.png`,
-      category: 'frontend',
-      technologies: ['React', 'Chart.js', 'CSS3', 'JavaScript'],
-      liveLink: '/projects/car-voting',
-      githubLink: 'https://github.com/smangasmashntuli/sntuliport',
-      isInternal: true
+      title: 'TeachWave Learning Platform',
+      description: 'Responsive learning platform with subject management, learner progress tracking, and interactive learning tools.',
+      image: `${import.meta.env.BASE_URL}images/Screenshot 2026-02-26 204210.png`,
+      technologies: ['React', 'Tailwind CSS', 'TypeScript', 'MySQL', 'Express'],
+      demoLink: null,
+      githubLink: 'https://github.com/smangasmashntuli/teachwave-pro',
+      isInternal: false
     },
     {
       title: 'Health Aid Chatbot',
       description: 'AI-powered chatbot providing preliminary health advice and symptom analysis with integration to healthcare providers.',
       image: `${import.meta.env.BASE_URL}images/Screenshot 2025-05-26 165242.png`,
-      category: 'fullstack',
       technologies: ['React', 'Gemini AI', 'CSS3', 'JavaScript'],
-      liveLink: '/projects/health-chatbot',
+      demoLink: '/projects/health-chatbot',
       githubLink: 'https://github.com/smangasmashntuli/sntuliport',
       isInternal: true
     },
@@ -43,129 +29,157 @@ function Projects() {
       title: 'Chicken Licken Clone',
       description: 'Responsive restaurant website with menu filtering, online ordering system, and location finder.',
       image: `${import.meta.env.BASE_URL}images/Screenshot 2025-02-12 152328.png`,
-      category: 'frontend',
       technologies: ['React', 'CSS3', 'JavaScript'],
-      liveLink: '/projects/chicken-licken',
+      demoLink: '/projects/chicken-licken',
       githubLink: 'https://github.com/smangasmashntuli/sntuliport',
       isInternal: true
     },
     {
-      title: 'TeachWave Learning Platform',
-      description: 'Responsive learning platform with subject management, learner progress tracking, and interactive learning tools.',
-      image: `${import.meta.env.BASE_URL}images/Screenshot 2026-02-26 204210.png`,
-      category: 'fullstack',
-      technologies: ['React', 'Tailwind CSS', 'TypeScript', 'MySQL', 'Express'],
-      liveLink: 'https://github.com/smangasmashntuli/teachwave-pro',
+      title: 'Mpheba Matrix',
+      description: 'An e-commerce platform for computer components with user authentication, product filtering, and payment integration.',
+      image: `${import.meta.env.BASE_URL}images/Screenshot 2025-05-24 231333.png`,
+      technologies: ['React', 'CSS3', 'JavaScript'],
+      demoLink: '/projects/mphemba-matrix',
       githubLink: 'https://github.com/smangasmashntuli/sntuliport',
-      isInternal: false
+      isInternal: true
+    },
+    {
+      title: 'Car Voting System',
+      description: 'Interactive application for car enthusiasts to vote and compare different car models with real-time results visualization.',
+      image: `${import.meta.env.BASE_URL}images/Screenshot 2025-05-22 232344.png`,
+      technologies: ['React', 'Chart.js', 'CSS3', 'JavaScript'],
+      demoLink: '/projects/car-voting',
+      githubLink: 'https://github.com/smangasmashntuli/sntuliport',
+      isInternal: true
     }
   ];
-
-  const filters = [
-    { name: 'All', value: 'all' },
-    { name: 'Front-End', value: 'frontend' },
-    { name: 'Full-Stack', value: 'fullstack' }
-  ];
-
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === filter);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
 
-    const elements = sectionRef.current.querySelectorAll('.animate-on-scroll');
-    elements.forEach(el => observer.observe(el));
+    const elements = sectionRef.current?.querySelectorAll('.animate-on-scroll') || [];
+    elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, [filter]);
+  }, []);
 
   return (
     <section className="projects-section section" id="projects" ref={sectionRef}>
-      <Container>
+      <div className="container">
         <div className="section-header animate-on-scroll">
           <h2 className="section-title gradient-text">My Projects</h2>
           <p className="section-subtitle">Some of my recent work</p>
         </div>
-        
-        <div className="projects-filter animate-on-scroll">
-          {filters.map((f, index) => (
-            <Button
-              key={index}
-              className={`filter-btn ${filter === f.value ? 'active' : ''}`}
-              onClick={() => setFilter(f.value)}
-            >
-              {f.name}
-            </Button>
-          ))}
-        </div>
-        
-        <Row>
-          {filteredProjects.map((project, index) => (
-            <Col lg={4} md={6} key={index} className="mb-4">
-              <div className="project-card animate-on-scroll">
-                <div className="project-image-wrapper">
-                  <img src={project.image} alt={project.title} className="project-image" />
-                  <div className="project-overlay">
-                    <div className="project-links">
-                      {project.isInternal ? (
-                        <Link 
-                          to={project.liveLink}
-                          className="project-link"
-                          aria-label="Live Demo"
-                        >
+
+        <div className="timeline-container">
+          <div className="timeline-line"></div>
+
+          {projects.map((project, index) => {
+            const isEven = index % 2 === 0;
+
+            return (
+              <div
+                key={project.title}
+                className={`timeline-item ${isEven ? 'left' : 'right'} animate-on-scroll`}
+              >
+                <div className="timeline-content">
+                  <span className="timeline-number">{String(index + 1).padStart(2, '0')}</span>
+
+                  <h3 className="timeline-title">{project.title}</h3>
+
+                  <p className="timeline-description">{project.description}</p>
+
+                  <div className="timeline-tech">
+                    {project.technologies.map((tech) => (
+                      <span key={tech} className="timeline-tech-pill">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="timeline-links">
+                    {project.demoLink ? (
+                      project.isInternal ? (
+                        <Link to={project.demoLink} className="timeline-link timeline-link-primary">
                           <FaExternalLinkAlt />
+                          <span>View Demo</span>
                         </Link>
                       ) : (
-                        <a 
-                          href={project.liveLink} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="project-link"
-                          aria-label="Live Demo"
+                        <a
+                          href={project.demoLink}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="timeline-link timeline-link-primary"
                         >
                           <FaExternalLinkAlt />
+                          <span>View Demo</span>
                         </a>
-                      )}
-                      <a 
+                      )
+                    ) : null}
+
+                    <a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="timeline-link"
+                    >
+                      <FaGithub />
+                      <span>GitHub Repo</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div className="timeline-dot"></div>
+
+                <div className="timeline-image-wrapper">
+                  <img src={project.image} alt={project.title} className="timeline-image" />
+
+                  <div className="timeline-overlay">
+                    <div className="project-links">
+                      {project.demoLink ? (
+                        project.isInternal ? (
+                          <Link to={project.demoLink} className="project-link" aria-label="View demo">
+                            <FaExternalLinkAlt />
+                          </Link>
+                        ) : (
+                          <a
+                            href={project.demoLink}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="project-link"
+                            aria-label="View demo"
+                          >
+                            <FaExternalLinkAlt />
+                          </a>
+                        )
+                      ) : null}
+
+                      <a
                         href={project.githubLink}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noreferrer"
                         className="project-link"
-                        aria-label="View Code"
+                        aria-label="GitHub repo"
                       >
                         <FaGithub />
                       </a>
                     </div>
                   </div>
                 </div>
-                
-                <div className="project-content">
-                  <h3 className="project-title">{project.title}</h3>
-                  <p className="project-description">{project.description}</p>
-                  
-                  <div className="project-tech">
-                    {project.technologies.map((tech, i) => (
-                      <Badge key={i} bg="transparent" className="tech-badge">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
               </div>
-            </Col>
-          ))}
-        </Row>
-      </Container>
+            );
+          })}
+        </div>
+      </div>
     </section>
   );
 }
