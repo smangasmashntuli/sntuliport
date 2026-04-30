@@ -8,7 +8,7 @@
   background: var(--gradient-primary);
   background-size: 200% 200%;
   border: none;
-  color: white;
+  color: var(--ink);
   font-size: 1.25rem;
   display: flex;
   align-items: center;
@@ -31,7 +31,7 @@
 
 .back-to-top:hover {
   transform: scale(1.15) translateY(-8px) rotate(10deg);
-  box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
+  box-shadow: 0 15px 40px rgba(201, 168, 76, 0.5);
 }
 
 .back-to-top:active {

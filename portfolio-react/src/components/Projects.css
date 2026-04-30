@@ -10,7 +10,7 @@
   left: 0;
   width: 50%;
   height: 100%;
-  background: radial-gradient(circle at 20% 50%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
+  background: radial-gradient(circle at 20% 50%, var(--dim) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -37,7 +37,7 @@
 .filter-btn.active {
   background: var(--gradient-primary);
   border-color: transparent;
-  color: white;
+  color: var(--ink);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -63,7 +63,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, var(--dim), transparent);
   transition: left 0.7s ease;
   z-index: 1;
 }
@@ -91,7 +91,7 @@
 
 .project-card:hover {
   transform: translateY(-15px) rotateX(2deg);
-  box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 20px 60px rgba(201, 168, 76, 0.3);
   border-color: var(--primary-color);
 }
 
@@ -122,7 +122,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(15, 23, 42, 0.9);
+  background: rgba(17, 18, 24, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -147,7 +147,7 @@
   justify-content: center;
   border-radius: 50%;
   background: var(--gradient-primary);
-  color: white;
+  color: var(--ink);
   font-size: 1.25rem;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -170,8 +170,8 @@
 
 .project-link:hover {
   transform: scale(1.2);
-  box-shadow: 0 5px 20px rgba(99, 102, 241, 0.5);
-  color: white;
+  box-shadow: 0 5px 20px rgba(201, 168, 76, 0.5);
+  color: var(--ink);
 }
 
 .project-content {
@@ -206,7 +206,7 @@
   gap: 0.75rem;
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(99, 102, 241, 0.1);
+  border-top: 1px solid var(--border);
   flex-shrink: 0;
   position: relative;
   z-index: 2;
@@ -219,7 +219,7 @@
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--primary-color);
-  background: rgba(99, 102, 241, 0.1) !important;
+  background: var(--dim) !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative !important;
   box-sizing: border-box;
@@ -244,10 +244,10 @@
 }
 
 .tech-badge:hover {
-  color: white;
+  color: var(--ink);
   border-color: transparent;
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 5px 15px rgba(201, 168, 76, 0.3);
 }
 
 /* Responsive Design */
@@ -288,7 +288,7 @@
   top: 0;
   bottom: 0;
   width: 1px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--border);
   transform: translateX(-50%);
 }
 
@@ -326,7 +326,7 @@
 /* NUMBER */
 .timeline-number {
   font-size: 5rem;
-  color: gold;
+  color: var(--gold);
   opacity: 0.1;
   font-family: serif;
 }
@@ -340,7 +340,7 @@
 
 /* DESCRIPTION */
 .timeline-description {
-  color: #aaa;
+  color: var(--muted);
   max-width: 400px;
 }
 
@@ -350,7 +350,7 @@
   left: 50%;
   width: 12px;
   height: 12px;
-  background: gold;
+  background: var(--gold);
   border-radius: 50%;
   transform: translateX(-50%);
   z-index: 2;
@@ -379,7 +379,7 @@
 .timeline-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(13, 13, 15, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -404,9 +404,9 @@
   align-items: center;
   padding: 0.45rem 0.85rem;
   border-radius: 999px;
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  background: rgba(212, 175, 55, 0.08);
-  color: #d4af37;
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  background: var(--dim);
+  color: var(--gold);
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -425,9 +425,9 @@
   gap: 0.55rem;
   padding: 0.8rem 1.15rem;
   border-radius: 999px;
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  background: rgba(255, 255, 255, 0.02);
-  color: #f2e6c9;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  background: rgba(22, 23, 31, 0.8);
+  color: var(--cream);
   text-decoration: none;
   font-size: 0.85rem;
   transition: all 0.3s ease;
@@ -438,14 +438,14 @@
 }
 
 .timeline-link:hover {
-  color: #ffffff;
-  border-color: rgba(212, 175, 55, 0.75);
-  background: rgba(212, 175, 55, 0.12);
+  color: var(--cream);
+  border-color: rgba(201, 168, 76, 0.75);
+  background: rgba(201, 168, 76, 0.12);
   transform: translateY(-2px);
 }
 
 .timeline-link-primary {
-  background: rgba(212, 175, 55, 0.16);
+  background: rgba(201, 168, 76, 0.16);
 }
 
 /* MOBILE */
