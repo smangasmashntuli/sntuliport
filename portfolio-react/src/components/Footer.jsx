@@ -16,7 +16,7 @@ function Footer() {
               <h3 className="logo-text gradient-text">SN</h3>
               <p className="footer-description">
                 Building digital experiences that matter. Crafting beautiful, 
-                functional, and user-friendly web applications.
+                functional, and user-friendly applications.
               </p>
             </div>
           </Col>
@@ -37,7 +37,7 @@ function Footer() {
                 </li>
                 <li>
                   <Link to="skills" smooth={true} duration={500} offset={-70}>
-                    Skills
+                    Education
                   </Link>
                 </li>
                 <li>
@@ -59,17 +59,6 @@ function Footer() {
             </div>
           </Col>
           
-          <Col lg={3} md={6} className="mb-4 mb-lg-0">
-            <div className="footer-links">
-              <h4>Services</h4>
-              <ul>
-                <li><a href="#services">Web Development</a></li>
-                <li><a href="#services">UI/UX Design</a></li>
-                <li><a href="#services">Consulting</a></li>
-                <li><a href="#services">Maintenance</a></li>
-              </ul>
-            </div>
-          </Col>
           
           <Col lg={3} md={6}>
             <div className="footer-social">
@@ -94,7 +83,7 @@ function Footer() {
         
         <div className="footer-bottom">
           <p className="copyright">
-            &copy; {currentYear} Simangaliso Maazweni Ntuli. Made with <FaHeart className="heart-icon" /> using React & Bootstrap
+            &copy; {currentYear} Simangaliso Mazweni Ntuli. Built using React & Bootstrap
           </p>
           <div className="footer-legal">
             <a href="#privacy">Privacy Policy</a>

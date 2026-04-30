@@ -34,7 +34,6 @@ function Hero() {
   }, []);
 
   useEffect(() => {
-    // Three.js mosaic hero inspired by inspo
     const container = canvasRef.current;
     if (!container) return;
 
@@ -166,7 +165,7 @@ function Hero() {
               </h3>
               <p className="hero-description">
                 I build exceptional digital experiences with modern web technologies.
-                Passionate about creating responsive, accessible, and performant web applications.
+                Passionate about building AI powered applications that solve real-world problems and create value.
               </p>
               
               <div className="hero-buttons">
