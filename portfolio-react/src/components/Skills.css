@@ -79,11 +79,11 @@
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #111;
+  color: var(--ink);
   padding: 0 32px;
 }
 .marquee-dot {
-  color: #111;
+  color: var(--ink);
   opacity: 0.4;
 }
 
