@@ -5,6 +5,10 @@ import { HiArrowDown } from 'react-icons/hi';
 import Typed from 'typed.js';
 import { Link } from 'react-scroll';
 import './Hero.css';
+import * as THREE from 'three';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 function Hero() {
   const canvasRef = useRef(null);
@@ -30,83 +34,117 @@ function Hero() {
   }, []);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Three.js mosaic hero inspired by inspo
+    const container = canvasRef.current;
+    if (!container) return;
 
-    const particles = [];
-    const particleCount = 100;
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x0a0a0a, 0.025);
 
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
-      }
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x0a0a0a, 0);
+    container.appendChild(renderer.domElement);
 
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
+    // simple procedural texture
+    function createTexture(index) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 256; canvas.height = 256;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = `hsl(0,0%,${6 + Math.random() * 6}%)`;
+      ctx.fillRect(0,0,256,256);
+      ctx.fillStyle = `rgba(200,165,92,${0.05 + Math.random() * 0.18})`;
+      for (let i=0;i<30;i++){ctx.fillRect(Math.random()*256,Math.random()*256,1.5,1.5)}
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
 
-        if (this.x > canvas.width) this.x = 0;
-        if (this.x < 0) this.x = canvas.width;
-        if (this.y > canvas.height) this.y = 0;
-        if (this.y < 0) this.y = canvas.height;
-      }
+    const cardGeometry = new THREE.PlaneGeometry(0.75, 0.75);
+    const cardGroup = new THREE.Group();
+    scene.add(cardGroup);
 
-      draw() {
-        ctx.fillStyle = 'rgba(99, 102, 241, 0.5)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+    const textures = [];
+    for (let i = 0; i < 8; i++) textures.push(createTexture(i));
+
+    // simple letter layout 'SM' as blocks
+    const grid = [
+      [1,0,1,0,1],
+      [1,0,1,0,1],
+      [1,1,1,1,1],
+      [1,0,1,0,1],
+      [1,0,1,0,1]
+    ];
+
+    const cards = [];
+    const spacing = 0.9;
+    const startX = -((grid[0].length - 1) * spacing) / 2;
+    for (let row = 0; row < grid.length; row++) {
+      for (let col = 0; col < grid[row].length; col++) {
+        if (grid[row][col]) {
+          const material = new THREE.MeshBasicMaterial({ map: textures[Math.floor(Math.random()*textures.length)], transparent:true, opacity:0.95 });
+          const card = new THREE.Mesh(cardGeometry, material);
+          const tx = startX + (col) * spacing;
+          const ty = (grid.length - row) * spacing - 2;
+          card.position.set(tx + (Math.random()-0.5)*8, ty + (Math.random()-0.5)*8, (Math.random()-0.5)*8);
+          card.rotation.set(Math.random()*Math.PI, Math.random()*Math.PI, Math.random()*Math.PI);
+          card.userData = { targetX: tx, targetY: ty, targetZ: 0, phase: Math.random()*Math.PI*2, speed: 0.3 + Math.random()*0.5 };
+          cardGroup.add(card);
+          cards.push(card);
+        }
       }
     }
 
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4); scene.add(ambientLight);
+    const pointLight = new THREE.PointLight(0xc8a55c, 0.8, 50); pointLight.position.set(5,5,8); scene.add(pointLight);
+    camera.position.z = 22;
 
+    // entrance animation
+    gsap.to(camera.position, { z: 11, duration: 2.2, ease: 'power3.inOut', delay: 0.3 });
+    cards.forEach((card,i)=>{
+      const delay = 0.5 + (i/cards.length)*0.8;
+      gsap.to(card.position, { x: card.userData.targetX, y: card.userData.targetY, z: card.userData.targetZ, duration:1.8, ease:'power3.out', delay });
+      gsap.to(card.rotation, { x:0,y:0,z:0, duration:1.8, ease:'power3.out', delay });
+    });
+
+    gsap.to(camera.position, { z: 2.5, scrollTrigger: { trigger: '#hero', start: 'top top', end: '+=120%', scrub: 1.5 }, duration: 1 });
+
+    let targetRotX = 0, targetRotY = 0;
+    document.addEventListener('mousemove', (e)=>{
+      const x = (e.clientX/window.innerWidth - 0.5)*2;
+      const y = (e.clientY/window.innerHeight - 0.5)*2;
+      targetRotY = x * 0.25; targetRotX = -y * 0.25;
+    });
+
+    const clock = new THREE.Clock();
     function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      particles.forEach(particle => {
-        particle.update();
-        particle.draw();
-      });
-
-      // Draw connections
-      particles.forEach((a, i) => {
-        particles.slice(i + 1).forEach(b => {
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 100) {
-            ctx.strokeStyle = `rgba(99, 102, 241, ${1 - distance / 100})`;
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
-        });
-      });
-
       requestAnimationFrame(animate);
+      const t = clock.getElapsedTime();
+      cardGroup.rotation.x += (targetRotX - cardGroup.rotation.x)*0.04;
+      cardGroup.rotation.y += (targetRotY - cardGroup.rotation.y)*0.04;
+      cards.forEach(card=>{
+        const yOffset = Math.sin(t*card.userData.speed + card.userData.phase)*0.015;
+        card.position.y = card.userData.targetY + yOffset;
+      });
+      renderer.render(scene, camera);
     }
-
     animate();
 
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
+    function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+    window.addEventListener('resize', onResize);
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+      if (renderer && renderer.domElement) container.removeChild(renderer.domElement);
+      // dispose textures
+      textures.forEach(t => { if (t) t.dispose && t.dispose(); });
+    };
   }, []);
 
   return (

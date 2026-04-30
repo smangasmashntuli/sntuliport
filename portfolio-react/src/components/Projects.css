@@ -188,6 +188,7 @@
   color: var(--text-primary);
   margin-bottom: 1rem;
   flex-shrink: 0;
+  font-family: 'Playfair Display', serif;
 }
 
 .project-description {
