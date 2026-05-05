@@ -1,0 +1,233 @@
+.education-section {
+  background: var(--dark-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.education-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -10%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--dim) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.education-card {
+  position: relative;
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.education-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 0;
+  background: var(--gradient-primary);
+  transition: height 0.6s ease;
+  border-radius: 20px 0 0 20px;
+}
+
+.education-card:hover::before {
+  height: 100%;
+}
+
+.education-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--dim) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.education-card:hover::after {
+  opacity: 1;
+  animation: rotateSlowly 15s linear infinite;
+}
+
+.education-card:hover {
+  transform: translateX(10px) scale(1.02);
+  border-color: var(--primary-color);
+  box-shadow: 0 15px 50px rgba(201, 168, 76, 0.25);
+}
+
+@keyframes rotateSlowly {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.education-icon {
+  width: 70px;
+  height: 70px;
+  min-width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  color: var(--ink);
+  font-size: 1.75rem;
+  box-shadow: 0 5px 20px rgba(201, 168, 76, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.education-card:hover .education-icon {
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 10px 30px rgba(201, 168, 76, 0.5);
+}
+
+.education-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.education-item {
+  padding: 1.5rem 0;
+}
+
+.education-item:first-child {
+  padding-top: 0;
+}
+
+.education-item:last-child {
+  padding-bottom: 0;
+}
+
+.qualification-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.university-name {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0.5rem 0;
+}
+
+.year-range {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0.5rem 0 0 0;
+  font-weight: 500;
+}
+
+.qualification-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--gradient-primary);
+  margin: 1.5rem 0;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.education-item:hover .qualification-divider {
+  width: 100%;
+  opacity: 1;
+}
+
+.education-line {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: width 0.6s ease;
+}
+
+.education-card:hover .education-line {
+  width: 4px;
+  opacity: 0.6;
+  border-radius: 0 20px 20px 0;
+}
+
+.animate-on-scroll {
+  animation: fadeInUp 0.6s ease-out forwards;
+  animation-play-state: paused;
+}
+
+.animate-on-scroll.is-visible {
+  animation-play-state: running;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .education-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .education-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .qualification-divider {
+    margin: 1rem 0;
+  }
+
+  .education-item {
+    padding: 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .education-card {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .education-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+
+  .qualification-title {
+    font-size: 1rem;
+  }
+
+  .university-name,
+  .year-range {
+    font-size: 0.85rem;
+  }
+}
