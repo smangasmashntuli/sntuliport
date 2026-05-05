@@ -54,6 +54,23 @@ function Projects() {
     }
   ];
 
+  // Get base URL from import.meta.env or window.location
+  const baseURL = import.meta.env.BASE_URL || '/sntuliport/';
+  
+  // Helper function to open internal links in new tab with correct base URL
+  const openInNewTab = (path) => {
+    // Remove leading slash if baseURL already has it
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    const cleanBaseURL = baseURL.endsWith('/') ? baseURL : `${baseURL}/`;
+    const fullPath = `${cleanBaseURL}${cleanPath}`;
+    
+    // For React Router, use window.location.origin to get the full URL
+    const fullUrl = `${window.location.origin}${fullPath}`;
+    
+    console.log('Opening URL:', fullUrl); // For debugging
+    window.open(fullUrl, '_blank', 'noopener,noreferrer');
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -109,15 +126,19 @@ function Projects() {
                   <div className="timeline-links">
                     {project.demoLink ? (
                       project.isInternal ? (
-                        <Link to={project.demoLink} className="timeline-link timeline-link-primary">
+                        <button
+                          onClick={() => openInNewTab(project.demoLink)}
+                          className="timeline-link timeline-link-primary"
+                          style={{ cursor: 'pointer', background: 'none', border: 'none', padding: 0 }}
+                        >
                           <FaExternalLinkAlt />
                           <span>View Demo</span>
-                        </Link>
+                        </button>
                       ) : (
                         <a
                           href={project.demoLink}
                           target="_blank"
-                          rel="noreferrer"
+                          rel="noopener noreferrer"
                           className="timeline-link timeline-link-primary"
                         >
                           <FaExternalLinkAlt />
@@ -129,7 +150,7 @@ function Projects() {
                     <a
                       href={project.githubLink}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       className="timeline-link"
                     >
                       <FaGithub />
@@ -147,14 +168,19 @@ function Projects() {
                     <div className="project-links">
                       {project.demoLink ? (
                         project.isInternal ? (
-                          <Link to={project.demoLink} className="project-link" aria-label="View demo">
+                          <button
+                            onClick={() => openInNewTab(project.demoLink)}
+                            className="project-link"
+                            aria-label="View demo"
+                            style={{ cursor: 'pointer', background: 'none', border: 'none', padding: 0 }}
+                          >
                             <FaExternalLinkAlt />
-                          </Link>
+                          </button>
                         ) : (
                           <a
                             href={project.demoLink}
                             target="_blank"
-                            rel="noreferrer"
+                            rel="noopener noreferrer"
                             className="project-link"
                             aria-label="View demo"
                           >
@@ -166,7 +192,7 @@ function Projects() {
                       <a
                         href={project.githubLink}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="project-link"
                         aria-label="GitHub repo"
                       >
