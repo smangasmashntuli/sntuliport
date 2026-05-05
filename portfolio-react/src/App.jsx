@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
-import Skills from './components/Skills';
+import Education from './components/Education';
 import WorkExperience from './components/WorkExperience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
@@ -66,7 +66,7 @@ function App() {
             <Navigation />
             <Hero />
             <About />
-            <Skills />
+            <Education />
             <WorkExperience />
             <Projects />
             <Contact />
