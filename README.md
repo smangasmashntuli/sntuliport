@@ -79,11 +79,6 @@ The portfolio uses CSS variables defined in `src/index.css` for easy customizati
 }
 ```
 
-### Adding New Projects
-1. Create a new project component in `src/projects/`
-2. Add project details to the `Projects` component
-3. Update navigation routes in `App.jsx`
-
 ## Performance Optimizations
 
 - Lazy loading of images
@@ -100,14 +95,6 @@ The portfolio uses CSS variables defined in `src/index.css` for easy customizati
 - Edge (latest)
 - Mobile browsers
 
-## Contributing
-
-Contributions are welcome! Feel free to:
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a pull request
 
 ## Contact
 
@@ -116,76 +103,12 @@ Contributions are welcome! Feel free to:
 - **GitHub:** [github.com/smangasmashntuli](https://github.com/smangasmashntuli)
 - **LinkedIn:** [linkedin.com/in/simangaliso-mazweni-ntuli-1784a62b6](https://www.linkedin.com/in/simangaliso-mazweni-ntuli-1784a62b6)
 
-## License
-
-This project is open source and available under the MIT License. See the LICENSE file for more details.
-
----
-
-**Made with ❤️ by Simangaliso Ntuli**ologies used
 
 ### 7. **Contact**
    - Contact form
    - Email validation
    - Direct communication options
 
-## Project Structure
 
-```
-portfolio-react/
-├── public/
-│   └── images/                    # Project and profile images
-├── src/
-│   ├── components/                # React components
-│   │   ├── About.jsx
-│   │   ├── About.css
-│   │   ├── BackToTop.jsx
-│   │   ├── BackToTop.css
-│   │   ├── Contact.jsx
-│   │   ├── Contact.css
-│   │   ├── Education.jsx
-│   │   ├── Education.css
-│   │   ├── Footer.jsx
-│   │   ├── Footer.css
-│   │   ├── Hero.jsx
-│   │   ├── Hero.css
-│   │   ├── Loader.jsx
-│   │   ├── Loader.css
-│   │   ├── Navigation.jsx
-│   │   ├── Navigation.css
-│   │   ├── ParallaxBackground.jsx
-│   │   ├── Projects.jsx
-│   │   ├── Projects.css
-│   │   ├── WorkExperience.jsx
-│   │   └── WorkExperience.css
-│   ├── hooks/
-│   │   └── useAnimations.js       # Custom animation hooks
-│   ├── projects/                  # Individual project components
-│   │   ├── CarVoting/
-│   │   ├── ChickenLicken/
-│   │   ├── HealthChatbot/
-│   │   └── MphembaMatrix/
-│   ├── App.jsx                    # Main App component
-│   ├── App.css                    # App styles
-│   ├── main.jsx                   # Entry point
-│   └── index.css                  # Global styles & CSS variables
-├── index.html
-├── package.json
-├── vite.config.js
-└── README.md
-```
 
-## Contact
-
-- **Email:** smangasmashntuli@gmail.com
-- **Phone:** (+27) 71 271 9018
-- **GitHub:** [github.com/smangasmashntuli](https://github.com/smangasmashntuli)
-- **LinkedIn:** [linkedin.com/in/simangaliso-mazweni-ntuli-1784a62b6](https://www.linkedin.com/in/simangaliso-mazweni-ntuli-1784a62b6)
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-Made with ❤️ by Simangaliso Ntuli
+Brother Smash😎
