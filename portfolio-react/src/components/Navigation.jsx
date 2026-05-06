@@ -6,7 +6,6 @@ import './Navigation.css';
 function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const [overlayOpen, setOverlayOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,32 +26,19 @@ function Navigation() {
   ];
 
   return (
-    <>
-      <Navbar 
-        expand="lg" 
-        fixed="top" 
-        className={`custom-navbar ${scrolled ? 'navbar-scrolled' : ''}`}
-        expanded={expanded}
-        onToggle={() => setExpanded(!expanded)}
-      >
+    <Navbar 
+      expand="lg" 
+      fixed="top" 
+      className={`custom-navbar ${scrolled ? 'navbar-scrolled' : ''}`}
+      expanded={expanded}
+      onToggle={(expanded) => setExpanded(expanded)}
+    >
       <Container>
         <Navbar.Brand href="#home" className="navbar-brand-custom">
           <span className="logo-text gradient-text">SM</span>
         </Navbar.Brand>
         
-        <Navbar.Toggle aria-controls="navbar-nav" className="custom-toggler" onClick={() => {
-          if (window.innerWidth < 992) {
-            // open full-screen overlay on small screens
-            setOverlayOpen(true);
-            setExpanded(false);
-          } else {
-            setExpanded(!expanded);
-          }
-        }}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </Navbar.Toggle>
+        <Navbar.Toggle aria-controls="navbar-nav" className="custom-toggler" />
         
         <Navbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">
@@ -83,20 +69,7 @@ function Navigation() {
           </a>
         </Navbar.Collapse>
       </Container>
-      </Navbar>
-
-      {/* Full screen overlay for mobile menu */}
-      <div className={`nav-overlay ${overlayOpen ? 'active' : ''}`} id="nav-overlay">
-        <div className="nav-overlay-inner">
-          <nav className="text-center">
-            {navItems.map((item, i) => (
-              <a key={i} href={`#${item.to}`} className="overlay-link" onClick={() => setOverlayOpen(false)}>{item.name}</a>
-            ))}
-          </nav>
-          <button className="overlay-close" onClick={() => setOverlayOpen(false)}>Close</button>
-        </div>
-      </div>
-    </>
+    </Navbar>
   );
 }
 
