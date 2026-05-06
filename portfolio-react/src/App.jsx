@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
-import About from './components/About';
-import Education from './components/Education';
-import WorkExperience from './components/WorkExperience';
+import Skills from './components/Skills';
 import Projects from './components/Projects';
+import WorkExperience from './components/WorkExperience';
+import Education from './components/Education';
+import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
@@ -65,10 +66,11 @@ function App() {
             <div className="noise-overlay" />
             <Navigation />
             <Hero />
-            <About />
-            <Education />
-            <WorkExperience />
+            <Skills />
             <Projects />
+            <WorkExperience />
+            <Education />
+            <About />
             <Contact />
             <Footer />
             <BackToTop />

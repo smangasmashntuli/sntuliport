@@ -19,10 +19,10 @@ function Navigation() {
 
   const navItems = [
     { name: 'Home', to: 'hero' },
-    { name: 'About', to: 'about' },
-    { name: 'Education', to: 'education' },
-    { name: 'Experience', to: 'experience' },
     { name: 'Projects', to: 'projects' },
+    { name: 'Experience', to: 'experience' },
+    { name: 'Education', to: 'education' },
+    { name: 'About', to: 'about' },
     { name: 'Contact', to: 'contact' }
   ];
 
