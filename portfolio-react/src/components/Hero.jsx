@@ -198,7 +198,7 @@ function Hero() {
             <div className="hero-image-container">
               <div className="image-bg-shape"></div>
               <img 
-                src={`${import.meta.env.BASE_URL}images/SM_Graduate.jpg`}
+                src={`${import.meta.env.BASE_URL}images/SM_Graduate-removebg.png`}
                 alt="Simangaliso Ntuli" 
                 className="hero-image"
               />
