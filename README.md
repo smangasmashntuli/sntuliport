@@ -16,13 +16,15 @@ A modern, responsive portfolio website built with React.js and Bootstrap, showca
 
 ## Screenshots
 
-![Portfolio Preview](./public/images/portfolio-preview.png)
+<img width="1243" height="582" alt="portfolio" src="https://github.com/user-attachments/assets/7ed19bbb-98f2-4b49-a6b0-bbfbb0359a49" />
+
 
 *A snapshot of the portfolio showcasing the modern interface and design with gradient effects*
 
 ## Live Demo
 
-Visit the portfolio at: [https://smangasmashntuli.github.io/sntuliport](https://smangasmashntuli.github.io/sntuliport)
+Visit the portfolio at: <a href="https://smangasmashntuli.github.io/sntuliport" target="_blank">https://smangasmashntuli.github.io/sntuliport</a>
+
 
 ## Technologies Used
 
