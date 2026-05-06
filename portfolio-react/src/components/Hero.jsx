@@ -151,8 +151,8 @@ function Hero() {
       <canvas ref={canvasRef} className="hero-canvas" />
       
       <Container className="hero-container">
-        <Row className="align-items-center justify-content-center min-vh-100">
-          <Col lg={8} className="hero-content">
+        <Row className="align-items-center justify-content-between min-vh-100">
+          <Col lg={6} className="hero-content">
             <div className="hero-text">
               <h1 className="hero-greeting">
                 Hi, I'm
@@ -187,10 +187,22 @@ function Hero() {
                 <a href="https://www.facebook.com/smanga.ntuli.378" target="_blank" rel="noopener noreferrer" className="social-icon">
                   <FaFacebook />
                 </a>
-                <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" className="social-icon">
+                <a href="https://twitter.twitter/yourusername" target="_blank" rel="noopener noreferrer" className="social-icon">
                   <FaTwitter />
                 </a>
               </div>
+            </div>
+          </Col>
+
+          <Col lg={5} className="hero-image-wrapper">
+            <div className="hero-image-container">
+              <div className="image-bg-shape"></div>
+              <img 
+                src={`${import.meta.env.BASE_URL}images/SM_Graduate.jpg`}
+                alt="Simangaliso Ntuli" 
+                className="hero-image"
+              />
+              <div className="image-glow"></div>
             </div>
           </Col>
         </Row>
