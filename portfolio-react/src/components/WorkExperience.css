@@ -195,7 +195,7 @@
   align-items: flex-start;
   gap: 1rem;
   padding: 0.75rem 0;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   line-height: 1.7;
   transition: all 0.3s ease;
