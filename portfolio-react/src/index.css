@@ -283,7 +283,7 @@ body {
 }
 
 .section-title {
-  font-size: 3rem;
+  font-size: 2.1875rem;
   font-weight: 700;
   margin-bottom: 1rem;
   text-align: center;
@@ -315,7 +315,7 @@ body {
 }
 
 .section-subtitle {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   text-align: center;
   margin-bottom: 4rem;
@@ -422,11 +422,11 @@ body {
 /* Responsive Typography */
 @media (max-width: 768px) {
   .section-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
   
   .section-subtitle {
-    font-size: 1rem;
+    font-size: 0.875rem;
   }
   
   .section {
