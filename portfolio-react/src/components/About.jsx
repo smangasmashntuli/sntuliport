@@ -60,14 +60,15 @@ function About() {
             <div className="about-content animate-on-scroll">
               <h3 className="about-heading">Who am I?</h3>
               <p className="about-text">
-                I'm a passionate <span className="highlight">Front-End Developer</span> with expertise in building modern, 
-                responsive, and accessible web applications. I specialize in JavaScript frameworks and have 
-                experience working with both front-end and back-end technologies through my school coursework.
+                I'm a passionate <span className="highlight">Software Developer</span> with a strong interest in building
+                AI-integrated systems and modern web applications. I focus on Python and web development, and I enjoy
+                designing solutions that combine intelligent systems with practical, real-world applications.
+                I have experience working across both front-end and back-end technologies through my academic projects and personal work.
               </p>
               <p className="about-text">
-                I believe in writing clean, maintainable code and creating user experiences that delight. 
-                My journey in web development has been driven by curiosity and a genuine love for creating 
-                things that live on the internet.
+                I believe in writing clean, maintainable code and building systems that are efficient, scalable, and user-focused.
+                My journey in software development is driven by curiosity and a growing passion for artificial intelligence,
+                automation, and creating impactful digital solutions.
               </p>
               
               <div className="about-details">
